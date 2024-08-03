@@ -2,8 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\{Event, URL};
 
 test('email can be verified', function () {
     $user = User::factory()->unverified()->create();
@@ -20,7 +19,7 @@ test('email can be verified', function () {
 
     Event::assertDispatched(Verified::class);
     expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
-    $response->assertRedirect(config('app.frontend_url').'/dashboard?verified=1');
+    $response->assertRedirect(config('app.frontend_url') . '/dashboard?verified=1');
 });
 
 test('email is not verified with invalid hash', function () {
