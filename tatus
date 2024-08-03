@@ -1,0 +1,18 @@
+[33mcommit bfd3176999d59ce87373b1c6db86698c6842c912[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/ABM-2-setup-dev[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/feature/ABM-2-setup-dev[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mmain[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: 55b25c1 d06c760
+Author: luiz.escobal <luiz.escobal@profiz.com.br>
+Date:   Sat Aug 3 14:13:54 2024 -0400
+
+    Resolvendo conflitos do merge
+
+[33mcommit 55b25c1ecf2f17d07aa4c64a4c8be6405d936b53[m
+Author: luiz.escobal <luiz.escobal@profiz.com.br>
+Date:   Sat Aug 3 14:10:30 2024 -0400
+
+    ABM-1-instalando-laravel-com-docker
+
+[33mcommit d06c76005ffc1f6aac0ba946e89fbd739784d294[m
+Author: Luiz  Escobar <54407649+LuizEscobarC@users.noreply.github.com>
+Date:   Sat Aug 3 02:02:49 2024 -0400
+
+    Initial commit
