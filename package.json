@@ -3,6 +3,7 @@
     "husky": "^9.1.4"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "husky install"
   }
 }
