@@ -8,7 +8,7 @@ if [ $? -ne 0 ]; then
 fi;
 
 # rodar os testes
-php artisan test | php
+./vendor/bin/sail test --parallel | php
 if [ $? -ne 0 ]; then
     echo "Opa! Deu ruim aqui com algum teste no Pest. Corrija antes de continuar... 😉";
     exit 1;

@@ -14,7 +14,7 @@ it('creates a bank account via CLI', function () {
 // teste de criação sem nome
 it('fails to create a bank account without a name', function () {
     Artisan::call('bank-account:create', ['name' => '']);
-    expect(Artisan::output())->toContain('The name field is required.');
+    expect(Artisan::output())->toContain('O nome é obrigatório.');
 });
 
 // teste de duplicação de nome de conta
@@ -27,14 +27,16 @@ it('fails to create a bank account with a duplicate name', function () {
     expect(Artisan::output())->toContain('O nome da conta já está em uso.');
 });
 
+// teste de nome com espaços
 it('does not allow creating a bank account with only whitespace in the name', function () {
     $name = '       ';
 
     Artisan::call('bank-account:create', ['name' => $name]);
 
-    expect(Artisan::output())->toContain('The name field is required.');
+    expect(Artisan::output())->toContain('O nome é obrigatório.');
 });
 
+// teste especial chars
 it('does not allow creating a bank account with special characters in the name', function () {
     $name = '@InvalidName!'; // Nome com caracteres especiais
 
