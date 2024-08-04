@@ -2,23 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AccountBank;
+use App\Services\AccountBankService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AccountBankController extends Controller
 {
+    protected AccountBankService $accountBankService;
+
+    public function __construct(AccountBankService $accountBankService)
+    {
+        $this->accountBankService = $accountBankService;
+    }
+
+    /**
+     * Cria uma nova conta bancária.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name'    => 'required|unique:account_banks,name',
-            'balance' => 'numeric|between:0,99999999999999.99',
-        ]);
+        try {
+            $accountBank = $this->accountBankService->create($request->all());
 
-        $accountBank = AccountBank::create([
-            'name'    => $validated['name'],
-            'balance' => !empty($validated['balance']) ? $validated['balance'] : 0.0,
-        ]);
-
-        return response()->json($accountBank, 201);
+            return response()->json($accountBank, 201);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        }
     }
 }

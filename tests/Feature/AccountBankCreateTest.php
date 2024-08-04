@@ -56,6 +56,7 @@ it('does not allow duplicate names for bank accounts', function () {
              ->assertJsonValidationErrors('name');
 });
 
+// testa conta com saldo negativo
 it('rejects negative balance', function () {
     $response = $this->postJson('/api/account-banks', [
         'name'    => 'Account with Negative Balance',
@@ -84,4 +85,19 @@ it('sets initial balance to zero if not provided', function () {
         'name'    => 'Account with Default Balance',
         'balance' => 0.00,
     ]);
+});
+
+// simula erro no servidor
+it('handles internal server errors gracefully', function () {
+    // Simula uma falha no servidor
+    $this->mock(\App\Services\AccountBankService::class, function ($mock) {
+        $mock->shouldReceive('create')->andThrow(new \Exception('Server error'));
+    });
+
+    $response = $this->postJson('/api/account-banks', [
+        'name'    => 'Error Account',
+        'balance' => 0.00,
+    ]);
+
+    $response->assertStatus(500); // Verifica o erro do servidor interno
 });
