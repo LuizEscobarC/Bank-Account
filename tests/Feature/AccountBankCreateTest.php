@@ -55,3 +55,13 @@ it('does not allow duplicate names for bank accounts', function () {
     $response->assertStatus(422)
              ->assertJsonValidationErrors('name');
 });
+
+it('rejects negative balance', function () {
+    $response = $this->postJson('/api/account-banks', [
+        'name'    => 'Account with Negative Balance',
+        'balance' => -100.00,
+    ]);
+
+    $response->assertStatus(422)
+             ->assertJsonValidationErrors(['balance']);
+});
