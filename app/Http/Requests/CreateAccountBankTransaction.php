@@ -32,6 +32,9 @@ class CreateAccountBankTransaction extends FormRequest
             'amount' => [
                 'required', 'numeric', 'min:0', new SenderEnoughAmountRule($this->sender_id),
             ],
+            'scheduled_at' => [
+                'nullable', "date_format:Y-m-d H:i:s",
+            ],
         ];
     }
 }

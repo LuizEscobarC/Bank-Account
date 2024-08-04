@@ -83,6 +83,18 @@ test('if account balance is enough to transfer', function () {
 });
 
 // Verificar se a transferência é registrada com a data e hora exata da operação.
-// it('should register schedule at the given time', function() {
+it('should register schedule at the given time', function () {
+    // arrange -> pega as contas
+    $accountSender    = AccountBank::factory()->create(['balance' => 8000.50]);
+    $accountRecipient = AccountBank::factory()->create(['balance' => 8100.50]);
 
-// });
+    // act -> fazer a transferencia
+    $post = $this->postJson(route('account-banks.transaction'), [
+        'sender_id'    => $accountSender->id,
+        'recipient_id' => $accountRecipient->id,
+        'amount'       => 3500,
+        'scheduled_at' => '2001-05-20 20:01', // Corrigido o formato da data
+    ]);
+
+    $post->assertJsonValidationErrors('scheduled_at');
+});
