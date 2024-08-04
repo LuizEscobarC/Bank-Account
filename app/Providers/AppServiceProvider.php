@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Models\{SuperModel};
+use App\Observers\GlobalUUIDObserver;
+use App\Services\UUIDService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Registra o serviço UUIDService
+        $this->app->singleton(UUIDService::class, function ($app) {
+            return new UUIDService();
+        });
     }
 
     /**
@@ -20,8 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
-            return config('app.frontend_url') . "/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
-        });
+        Model::unguard();
+        Model::preventLazyLoading(!app()->isProduction());
+
+        // Registro do Observer Global de Model
+        SuperModel::observe(GlobalUUIDObserver::class);
     }
 }
