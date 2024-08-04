@@ -65,3 +65,23 @@ it('rejects negative balance', function () {
     $response->assertStatus(422)
              ->assertJsonValidationErrors(['balance']);
 });
+
+// Teste de criação de conta zerada
+it('sets initial balance to zero if not provided', function () {
+    $response = $this->postJson('/api/account-banks', [
+        'name' => 'Account with Default Balance',
+    ]);
+
+    $response->assertStatus(201)
+             ->assertJson([
+                 'name'    => 'Account with Default Balance',
+                 'balance' => '0.00',
+             ]);
+
+    $data = $response->json();
+    $this->assertDatabaseHas('account_banks', [
+        'id'      => $data['id'],
+        'name'    => 'Account with Default Balance',
+        'balance' => 0.00,
+    ]);
+});

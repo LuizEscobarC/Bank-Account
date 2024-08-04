@@ -11,12 +11,12 @@ class AccountBankController extends Controller
     {
         $validated = $request->validate([
             'name'    => 'required|unique:account_banks,name',
-            'balance' => 'required|numeric|between:0,99999999999999.99',
+            'balance' => 'numeric|between:0,99999999999999.99',
         ]);
 
         $accountBank = AccountBank::create([
             'name'    => $validated['name'],
-            'balance' => $validated['balance'],
+            'balance' => !empty($validated['balance']) ? $validated['balance'] : 0.0,
         ]);
 
         return response()->json($accountBank, 201);
