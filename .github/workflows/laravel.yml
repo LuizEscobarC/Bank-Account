@@ -37,7 +37,7 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: php artisan test --parallel
+      run: php artisan test
       
     - name: Execute Larastan
       run: ./vendor/bin/phpstan analyse
