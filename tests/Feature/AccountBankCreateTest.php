@@ -39,20 +39,19 @@ it('requires a name to create a bank account', function () {
              ->assertJsonValidationErrors('name');
 });
 
-// // Teste de Nome Duplicado
-// it('does not allow duplicate names for bank accounts', function () {
-//     // Cria a primeira conta
-//     $this->postJson('/api/account-banks', [
-//         'name' => 'Duplicate Account Name',
-//         'balance' => 0.00,
-//     ]);
+// Teste de Nome Duplicado
+it('does not allow duplicate names for bank accounts', function () {
+    $this->postJson('/api/account-banks', [
+        'name'    => 'Duplicate Account Name',
+        'balance' => 0.00,
+    ]);
 
-//     // Tenta criar uma segunda conta com o mesmo nome
-//     $response = $this->postJson('/api/account-banks', [
-//         'name' => 'Duplicate Account Name',
-//         'balance' => 0.00,
-//     ]);
+    // Tenta criar uma segunda conta com o mesmo nome
+    $response = $this->postJson('/api/account-banks', [
+        'name'    => 'Duplicate Account Name',
+        'balance' => 0.00,
+    ]);
 
-//     $response->assertStatus(422)
-//              ->assertJsonValidationErrors('name');
-// });
+    $response->assertStatus(422)
+             ->assertJsonValidationErrors('name');
+});
