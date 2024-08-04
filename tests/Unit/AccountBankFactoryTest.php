@@ -9,5 +9,6 @@ it('creates a valid AccountBank instance using the factory', function () {
     expect($accountBank->id)->toBeString()->not()->toBeEmpty();
     expect($accountBank->name)->toBeString()->not()->toBeEmpty();
     expect($accountBank->balance)->toBeString()->not()->toBeEmpty();
-    ;
+    //uuid validation
+    expect($accountBank->id)->strlen(36);
 });
