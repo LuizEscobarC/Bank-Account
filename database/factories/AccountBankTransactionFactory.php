@@ -25,7 +25,6 @@ class AccountBankTransactionFactory extends Factory
             'recipient_id' => $recipientId,
             'amount'       => fake()->randomFloat(2, 0, 10000),
             'scheduled_at' => fake()->optional()->dateTime,
-            'authorized'   => fake()->boolean,
         ];
     }
 }

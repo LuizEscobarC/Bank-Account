@@ -17,5 +17,4 @@ it('creates a valid AccountBankTransaction instance using the factory', function
 
     expect($transaction->amount)->toBeEnum();
     expect($transaction->scheduled_at === null || $transaction->scheduled_at instanceof \DateTime)->toBeTrue();
-    expect($transaction->authorized)->toBeBool();
 });

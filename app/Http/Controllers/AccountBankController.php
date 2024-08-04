@@ -8,11 +8,8 @@ use Illuminate\Validation\ValidationException;
 
 class AccountBankController extends Controller
 {
-    protected AccountBankService $accountBankService;
-
-    public function __construct(AccountBankService $accountBankService)
+    public function __construct(private readonly AccountBankService $accountBankService)
     {
-        $this->accountBankService = $accountBankService;
     }
 
     /**
