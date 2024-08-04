@@ -1,8 +1,6 @@
 includes:
     - vendor/larastan/larastan/extension.neon
 parameters:
-    checkGenericClassInNonGenericObjectType: false
-
     paths:
         - app/
 
