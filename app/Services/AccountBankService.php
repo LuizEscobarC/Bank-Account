@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\AccountBank;
-use App\Rules\DuplicatedNameAccountBankRule;
+use App\Rules\{BlockEspecialCharsRule, DuplicatedNameAccountBankRule};
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -36,7 +36,12 @@ class AccountBankService
     protected function validate(array $data): void
     {
         $validator = Validator::make($data, [
-            'name'    => ['required', 'string', new DuplicatedNameAccountBankRule()],
+            'name' => [
+                'required',
+                'string',
+                new DuplicatedNameAccountBankRule(),
+                new BlockEspecialCharsRule(),
+            ],
             'balance' => 'nullable|numeric|min:0',
         ]);
 
