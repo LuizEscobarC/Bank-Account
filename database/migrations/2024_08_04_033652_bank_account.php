@@ -13,7 +13,7 @@ return new class () extends Migration {
         Schema::create('account_banks', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->decimal('balance', 15, 2);
+            $table->decimal('balance', 15, 2)->default(0.00);
             $table->timestamps();
         });
     }
