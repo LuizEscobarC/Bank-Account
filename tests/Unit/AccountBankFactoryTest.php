@@ -8,6 +8,6 @@ it('creates a valid AccountBank instance using the factory', function () {
     expect($accountBank)->toBeInstanceOf(AccountBank::class);
     expect($accountBank->id)->toBeString()->not()->toBeEmpty();
     expect($accountBank->name)->toBeString()->not()->toBeEmpty();
-    expect($accountBank->balance)->toBeEnum()->not()->toBeEmpty();
+    expect($accountBank->balance)->toBeString()->not()->toBeEmpty();
     ;
 });
