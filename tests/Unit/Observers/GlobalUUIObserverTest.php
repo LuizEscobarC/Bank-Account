@@ -1,8 +1,6 @@
 <?php
-
 use App\Observers\GlobalUUIDObserver;
 use App\Services\UUIDService;
-use Mockery;
 
 it('assigns a UUID when creating a model', function () {
     $uuidServiceMock = Mockery::mock(UUIDService::class);
