@@ -9,7 +9,7 @@ it('has the correct cast types', function () {
 
     expect($casts['id'])->toBe('string');
     expect($casts['amount'])->toBe('decimal:2');
-    expect($casts['scheduled_at'])->toBe('datetime');
+    expect($casts['scheduled_at'])->toBe('datetime:Y-m-d H:i:s');
     expect($casts['authorized'])->toBe('boolean');
 });
 

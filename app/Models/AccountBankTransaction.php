@@ -15,7 +15,7 @@ class AccountBankTransaction extends SuperModel
     protected $casts = [
         'id'           => 'string',
         'amount'       => 'decimal:2',
-        'scheduled_at' => 'datetime',
+        'scheduled_at' => 'datetime:Y-m-d H:i:s',
         'authorized'   => 'boolean',
     ];
 }

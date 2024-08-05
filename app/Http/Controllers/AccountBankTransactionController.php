@@ -18,6 +18,6 @@ class AccountBankTransactionController extends Controller
             $request->validated()
         );
 
-        return response()->json($accountBank, 200);
+        return response()->json($accountBank, 201);
     }
 }
