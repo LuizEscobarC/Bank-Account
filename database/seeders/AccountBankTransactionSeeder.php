@@ -14,6 +14,6 @@ class AccountBankTransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        AccountBankTransaction::factory()->count(10)->create();
+        AccountBankTransaction::factory()->count(1000)->create();
     }
 }
