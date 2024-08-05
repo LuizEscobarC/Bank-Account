@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
+use App\Jobs\ProcessScheduledTransactionsJob;
 use Illuminate\Support\Facades\Artisan;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+Artisan::command('faz:transacoes', function () {
+    ProcessScheduledTransactionsJob::dispatch();
+})->purpose('Processa as transações agendadas')->everyMinute();

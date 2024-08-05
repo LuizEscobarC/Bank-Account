@@ -24,6 +24,8 @@ class ProcessIndividualTransactionsJob implements ShouldQueue
      */
     public function handle()
     {
+        // usar resolve()
+        // separar para um service - CHAMAR O SERVICE
         $balance = AccountBank::find($this->accountBankTransaction->sender_id)->balance;
 
         if ($balance > $this->accountBankTransaction->amount) {

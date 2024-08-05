@@ -4,9 +4,9 @@ namespace App\Jobs;
 
 use App\Models\AccountBankTransaction;
 use App\Services\AccountBankTransactionService;
+use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\Log;
 
 class ProcessScheduledTransactionsJob implements ShouldQueue
 {
@@ -18,10 +18,10 @@ class ProcessScheduledTransactionsJob implements ShouldQueue
     public function handle(): void
     {
 
-        Log::info('Verificando transações agendadas.');
-        echo "Verificando transações agendadas!";
+        $startOfDay = Carbon::now()->startOfDay();
+        $endOfDay   = Carbon::now()->endOfDay();
 
-        $transactions = AccountBankTransaction::whereDate('scheduled_at', now()->toDateString())->get();
+        $transactions = AccountBankTransaction::whereBetween('scheduled_at', [$startOfDay, $endOfDay])->get();
 
         foreach ($transactions as $transaction) {
             ProcessIndividualTransactionsJob::dispatch($transaction, new AccountBankTransactionService());
