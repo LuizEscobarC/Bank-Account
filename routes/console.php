@@ -1,8 +1,6 @@
 <?php
 
 use App\Jobs\ProcessScheduledTransactionsJob;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('faz:transacoes', function () {
-    ProcessScheduledTransactionsJob::dispatch();
-})->purpose('Processa as transações agendadas')->everyMinute();
+Schedule::job(new ProcessScheduledTransactionsJob())->everyMinute();

@@ -29,13 +29,11 @@ class ProcessIndividualTransactionsJob implements ShouldQueue
         $balance = AccountBank::find($this->accountBankTransaction->sender_id)->balance;
 
         if ($balance > $this->accountBankTransaction->amount) {
-            $this->accountBankTransactionService->create([
+            $this->accountBankTransactionService->updateAccountsBalance([
                 'amount'       => $this->accountBankTransaction->amount,
                 'sender_id'    => $this->accountBankTransaction->sender_id,
                 'recipient_id' => $this->accountBankTransaction->recipient_id,
-            ]);
+            ], $this->accountBankTransaction);
         }
-
-        $this->accountBankTransaction->delete();
     }
 }

@@ -17,7 +17,6 @@ class ProcessScheduledTransactionsJob implements ShouldQueue
      */
     public function handle(): void
     {
-
         $startOfDay = Carbon::now()->startOfDay();
         $endOfDay   = Carbon::now()->endOfDay();
 
