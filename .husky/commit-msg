@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/h"
+. "$(dirname -- "$0")/_/husky.sh"
 
 # Cores
 NC='\033[0m'
@@ -16,8 +16,7 @@ if [ -z "$ISSUE_ID" ]; then
     exit 1
 fi
 
-# i.g. HEY-1: HEY-1: my feature
-if [[ $COMMIT_MESSAGE == $ISSUE_ID* ]]; then
+if echo "$COMMIT_MESSAGE" | grep -q "^$ISSUE_ID"; then
     exit 0
 fi
 
