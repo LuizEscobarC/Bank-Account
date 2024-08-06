@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "6098350e-afc9-43bf-8d80-7207789c5943",
+        "_postman_id": "4963f93d-6fb4-4a90-a068-3e580881812c",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"sit\",\"balance\":\"nemo\"}"
+                            "raw": "{\"name\":\"eum\",\"balance\":\"labore\"}"
                         },
                         "description": "",
                         "auth": {
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"sender_id\":\"nam\",\"recipient_id\":\"id\",\"amount\":\"ratione\",\"scheduled_at\":\"amet\"}"
+                            "raw": "{\"sender_id\":\"ducimus\",\"recipient_id\":\"quod\",\"amount\":\"ea\",\"scheduled_at\":\"aut\"}"
                         },
                         "description": "",
                         "auth": {

@@ -84,11 +84,11 @@ paths:
                 name:
                   type: string
                   description: 'O nome do titular da conta. Exemplo: John Doe'
-                  example: sit
+                  example: eum
                 balance:
                   type: numeric
                   description: 'nullable O saldo inicial da conta. Exemplo: 1000.00'
-                  example: nemo
+                  example: labore
               required:
                 - name
       security: []
@@ -209,19 +209,19 @@ paths:
                 sender_id:
                   type: uuid
                   description: 'O ID da conta de origem. Exemplo: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6'
-                  example: nam
+                  example: ducimus
                 recipient_id:
                   type: uuid
                   description: 'O ID da conta de destino. Exemplo: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1'
-                  example: id
+                  example: quod
                 amount:
                   type: numeric
                   description: 'O valor a ser transferido. Exemplo: 1000.00'
-                  example: ratione
+                  example: ea
                 scheduled_at:
                   type: 'date_format:Y-m-d'
                   description: 'nullable A data e hora agendadas para a transação. Exemplo: 2024-08-07'
-                  example: amet
+                  example: aut
               required:
                 - sender_id
                 - recipient_id
