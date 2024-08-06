@@ -39,7 +39,7 @@ class AccountBankController extends Controller
      *
      * @param CreateAccountBankRequest $request
      * @param AccountBankService $accountBankService
-     * @return \Illuminate\Http\JsonResponse
+     * @return AccountBankResource
      * @throws \Exception
      */
     public function store(

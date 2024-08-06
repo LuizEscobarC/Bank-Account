@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAccountBankTransactionRequest;
 use App\Http\Resources\AccountBankTransactionResource;
 use App\Services\AccountBankTransactionService;
-use Illuminate\Http\JsonResponse;
 
 /**
  * @group Account Bank Transactions
@@ -58,7 +57,7 @@ class AccountBankTransactionController extends Controller
      *
      * @param CreateAccountBankTransactionRequest $request
      * @param AccountBankTransactionService $accountBankTransactionService
-     * @return JsonResponse
+     * @return AccountBankTransactionResource
      */
     public function transferAmount(
         CreateAccountBankTransactionRequest $request,
