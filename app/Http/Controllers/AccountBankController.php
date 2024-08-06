@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{CreateAccountBankRequest};
+use App\Http\Requests\CreateAccountBankRequest;
 use App\Services\AccountBankService;
-use Illuminate\Validation\ValidationException;
 
 class AccountBankController extends Controller
 {
@@ -13,19 +12,16 @@ class AccountBankController extends Controller
      *
      * @param CreateAccountBankRequest $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function store(
         CreateAccountBankRequest $request,
         AccountBankService $accountBankService
     ) {
-        try {
-            $accountBank = $accountBankService->create(
-                $request->validated()
-            );
+        $accountBank = $accountBankService->create(
+            $request->validated()
+        );
 
-            return response()->json($accountBank, 201);
-        } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
-        }
+        return response()->json($accountBank, 201);
     }
 }

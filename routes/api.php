@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\{AccountBankController, AccountBankTransactionController};
+use App\Http\Controllers\{
+    AccountBankController,
+    AccountBankTransactionController
+};
 use Illuminate\Support\Facades\Route;
 
 // Define a rota para criar uma nova conta bancária
 Route::group(['as' => 'account-banks.', 'prefix' => 'account-banks'], function () {
-    Route::post('/create', [AccountBankController::class, 'store'])->name('create');
-    Route::post('/transfer', [AccountBankTransactionController::class, 'tranferAmount'])->name("transaction");
+    Route::post('/store', [AccountBankController::class, 'store'])->name('create');
+    Route::post('/transfer', [AccountBankTransactionController::class, 'transferAmount'])->name("transaction");
 });

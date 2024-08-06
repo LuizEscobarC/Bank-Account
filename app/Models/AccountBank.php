@@ -14,7 +14,6 @@ class AccountBank extends SuperModel
     ];
 
     protected $casts = [
-        'id'      => 'string',
         'balance' => 'decimal:2',
     ];
 
