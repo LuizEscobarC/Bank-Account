@@ -11,19 +11,25 @@ it('creates a bank account with a unique name and initial zero balance', functio
     ]);
 
     $response->assertStatus(201)
-            ->assertJsonStructure([
-                'id',
-                'name',
-                'balance',
-                'created_at',
-                'updated_at',
-            ])
+             ->assertJsonStructure([
+                 'data' => [
+                     'id',
+                     'name',
+                     'balance',
+                     'created_at',
+                     'updated_at',
+                 ],
+             ])
              ->assertJson([
-                 'name'    => "{$uniqString}-name",
-                 'balance' => '0.00',
+                 'data' => [
+                     'name'    => "{$uniqString}-name",
+                     'balance' => 0.00,
+                 ],
              ]);
 
+    $data = $response->json('data'); // Acessa o conteúdo dentro de 'data'
     $this->assertDatabaseHas('account_banks', [
+        'id'      => $data['id'],
         'name'    => "{$uniqString}-name",
         'balance' => 0.00,
     ]);
@@ -58,15 +64,17 @@ it('sets initial balance to zero if not provided', function () {
 
     $response->assertStatus(201)
              ->assertJson([
-                 'name'    => 'Account with Default Balance',
-                 'balance' => 0,
+                 'data' => [
+                     'name'    => 'Account with Default Balance',
+                     'balance' => 0, // O valor do saldo deve ser igual a zero
+                 ],
              ]);
 
-    $data = $response->json();
+    $data = $response->json('data'); // Acessa o conteúdo dentro de 'data'
     $this->assertDatabaseHas('account_banks', [
         'id'      => $data['id'],
         'name'    => 'Account with Default Balance',
-        'balance' => 0.00,
+        'balance' => 0.00, // O saldo deve ser zero na base de dados
     ]);
 });
 

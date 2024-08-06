@@ -8,13 +8,22 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class SenderEnoughAmountRule implements ValidationRule
 {
+    /**
+     * Cria uma nova instância da regra de validação.
+     *
+     * @param  string|null  $senderId  ID do remetente
+     */
     public function __construct(public readonly string|null $senderId)
     {
     }
+
     /**
-     * Regra de validação para saldo (balance) insuficiente
+     * Valida se o remetente possui saldo suficiente para a transação.
      *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param  string  $attribute  Nome do atributo sendo validado
+     * @param  mixed  $value  Valor do atributo sendo validado (o montante da transação)
+     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail  Função de falha da validação
+     * @return void
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {

@@ -24,7 +24,7 @@ class AccountBankTransactionFactory extends Factory
         return [
             'sender_id'    => $sender->id,
             'recipient_id' => $recipient->id,
-            'status'       => TransactionStatusEnum::Pending,
+            'status'       => TransactionStatusEnum::Pending->value,
             'amount'       => $this->faker->randomFloat(2, 0, 10000),
             'scheduled_at' => now(),
         ];

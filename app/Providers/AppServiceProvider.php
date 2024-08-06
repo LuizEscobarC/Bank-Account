@@ -16,40 +16,49 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Registra os serviços da aplicação.
+     *
+     * @return void
      */
     public function register(): void
     {
-        // Registra o serviço UUIDService
+        // Registra o serviço UUIDService como singleton
         $this->app->singleton(UUIDService::class, function ($app) {
             return new UUIDService();
         });
 
+        // Registra o serviço AccountBankService como singleton
         $this->app->singleton(AccountBankService::class, function ($app) {
             return new AccountBankService();
         });
 
-        // Registre o cliente de autenticação externo com o e-mail codificado
+        // Registra o cliente de autenticação externo com o e-mail codificado
         $this->app->singleton(ExternalAuthClient::class, function ($app) {
             $email = 'luiz_escobar11@hotmail.com';
 
             return new ExternalAuthClient($email);
         });
 
+        // Registra o serviço AuthService como singleton
         $this->app->singleton(AuthService::class, function ($app) {
             return new AuthService($app->make(ExternalAuthClient::class));
         });
     }
 
     /**
-     * Bootstrap any application services.
+     * Inicializa os serviços da aplicação.
+     *
+     * @return void
      */
     public function boot(): void
     {
+        // Desprotege os modelos para acesso direto aos atributos
         Model::unguard();
+
+        // Desativa o carregamento preguiçoso fora do ambiente de produção
         Model::preventLazyLoading(!app()->isProduction());
 
-        // Registro do Observer Global de Model
+        // Registra o observer global para o modelo SuperModel
         SuperModel::observe(GlobalUUIDObserver::class);
     }
 }

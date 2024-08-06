@@ -10,10 +10,15 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * Requisição para criar uma transação bancária.
+ */
 class CreateAccountBankTransactionRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determina se o usuário está autorizado a fazer essa requisição.
+     *
+     * @return bool
      */
     public function authorize(): bool
     {
@@ -21,7 +26,7 @@ class CreateAccountBankTransactionRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Obtém as regras de validação que se aplicam à requisição.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
@@ -51,7 +56,7 @@ class CreateAccountBankTransactionRequest extends FormRequest
     }
 
     /**
-     * Custom validation messages.
+     * Obtém as mensagens de validação personalizadas para a requisição.
      *
      * @return array<string, string>
      */
@@ -76,7 +81,7 @@ class CreateAccountBankTransactionRequest extends FormRequest
     }
 
     /**
-     * Handle a failed validation attempt.
+     * Manipula uma tentativa de validação falhada.
      *
      * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @return void
@@ -87,7 +92,7 @@ class CreateAccountBankTransactionRequest extends FormRequest
     {
         // Ajusta o retorno da resposta para incluir apenas o primeiro erro
         throw new ValidationException($validator, response()->json([
-            'message' => 'The given data was invalid.',
+            'message' => 'Os dados enviados não são válidos.',
             'errors'  => $validator->errors(),
         ], 422));
     }

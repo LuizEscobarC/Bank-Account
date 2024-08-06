@@ -9,37 +9,66 @@ use Illuminate\Validation\ValidationException;
 
 class CreateBankAccountCommand extends Command
 {
-    protected $signature = 'bank-account:create {name : The name of the bank account}';
+    /**
+     * Nome e assinatura do comando.
+     *
+     * @var string
+     */
+    protected $signature = 'bank-account:create {name : Nome da conta bancária}';
 
-    protected $description = 'Create a new bank account with a unique name and zero balance';
+    /**
+     * Descrição do comando.
+     *
+     * @var string
+     */
+    protected $description = 'Cria uma nova conta bancária com saldo inicial de zero';
 
+    /**
+     * Instância do serviço de conta bancária.
+     *
+     * @var \App\Services\AccountBankService
+     */
     private AccountBankService $accountBankService;
 
+    /**
+     * Cria uma nova instância do comando.
+     *
+     * @param \App\Services\AccountBankService $accountBankService Serviço de conta bancária
+     */
     public function __construct(AccountBankService $accountBankService)
     {
         parent::__construct();
         $this->accountBankService = $accountBankService;
     }
 
-    public function handle()
+    /**
+     * Executa o comando para criar uma conta bancária.
+     *
+     * @return void
+     */
+    public function handle(): void
     {
+        $name = $this->argument('name');
+
         try {
-            $name = $this->argument('name');
-
             $this->validateName($name);
-
-            $this->accountBankService->create([
-                'name'    => $name,
-                'balance' => 0.00,
-            ]);
-
-            $this->info("Conta Bancaria '{$name}' criada com sucesso.");
-        } catch(\Exception $e) {
-            $this->error($e->getMessage());
+            $this->accountBankService->create(['name' => $name, 'balance' => 0.00]);
+            $this->info("Conta bancária '{$name}' criada com sucesso.");
+        } catch (ValidationException $e) {
+            $this->error('Erro de validação: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            $this->error('Erro: ' . $e->getMessage());
         }
     }
 
-    private function validateName(string $name)
+    /**
+     * Valida o nome da conta bancária.
+     *
+     * @param string $name
+     * @return void
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    private function validateName(string $name): void
     {
         $validator = Validator::make(['name' => $name], [
             'name' => nameRules(),
