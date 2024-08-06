@@ -18,7 +18,7 @@ class AccountBank extends SuperModel
     /**
      * Atributos que podem ser atribuídos em massa.
      *
-     * @var array<string>
+     * @var array<int,string>
      */
     protected $fillable = [
         'name',
