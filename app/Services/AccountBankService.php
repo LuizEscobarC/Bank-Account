@@ -10,9 +10,9 @@ class AccountBankService
     /**
      * Cria uma nova conta bancária com base nos dados fornecidos.
      *
-     * @param array $data
-     * @return AccountBank
-     * @throws ValidationException
+     * @param  array  $data  Dados para criar a conta bancária
+     * @return AccountBank  Instância da conta bancária criada
+     * @throws ValidationException  Exceção lançada se os dados fornecidos forem inválidos
      */
     public function create(array $data): AccountBank
     {

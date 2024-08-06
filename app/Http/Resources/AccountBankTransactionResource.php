@@ -5,16 +5,19 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * Recurso para a representação de uma transação bancária.
+ *
  * @mixin \App\Models\AccountBankTransaction
  */
 class AccountBankTransactionResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transforma o recurso em um array.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id'           => $this->id,

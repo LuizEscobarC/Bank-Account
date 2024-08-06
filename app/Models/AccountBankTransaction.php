@@ -6,9 +6,25 @@ use App\Enums\TransactionStatusEnum;
 use App\Observers\GlobalUUIDObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+/**
+ * Modelo que representa uma transação bancária.
+ *
+ * @property string $id
+ * @property string $sender_id
+ * @property string $recipient_id
+ * @property \App\Enums\TransactionStatusEnum $status
+ * @property float $amount
+ * @property \Carbon\Carbon|null $scheduled_at
+ * @property \Carbon\Carbon|null $processed_at
+ */
 #[ObservedBy([GlobalUUIDObserver::class])]
 class AccountBankTransaction extends SuperModel
 {
+    /**
+     * Atributos que podem ser atribuídos em massa.
+     *
+     * @var array<string>
+     */
     protected $fillable = [
         'sender_id',
         'recipient_id',
@@ -18,6 +34,11 @@ class AccountBankTransaction extends SuperModel
         'processed_at',
     ];
 
+    /**
+     * Casts para conversão de atributos.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'status'       => TransactionStatusEnum::class,
         'amount'       => 'decimal:2',
@@ -26,16 +47,22 @@ class AccountBankTransaction extends SuperModel
     ];
 
     /**
-     * Get the status attribute.
+     * Obtém o atributo de status.
      *
+     * @param  mixed  $value
      * @return \App\Enums\TransactionStatusEnum
      */
     public function getStatusAttribute($value)
     {
-        // Return a default value or handle the null case
+        // Retorna o status padrão se o valor for nulo ou inválido
         return TransactionStatusEnum::tryFrom($value) ?? TransactionStatusEnum::Pending;
     }
 
+    /**
+     * Autoriza a transação e atualiza o status e a data de processamento.
+     *
+     * @return void
+     */
     public function authorizeTransaction()
     {
         $this->update([
@@ -45,9 +72,9 @@ class AccountBankTransaction extends SuperModel
     }
 
     /**
+     * Marca a transação como não autorizada devido a saldo insuficiente.
      *
-     * Not Authorized
-     *
+     * @return void
      */
     public function markInsufficientBalance()
     {
@@ -57,7 +84,9 @@ class AccountBankTransaction extends SuperModel
     }
 
     /**
-     * Not Authorized
+     * Marca a transação como não autorizada.
+     *
+     * @return void
      */
     public function markNotAuthorized()
     {

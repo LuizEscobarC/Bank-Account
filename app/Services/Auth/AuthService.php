@@ -7,47 +7,42 @@ use App\Services\Data\{ExternalAuthRequestData, ExternalAuthResponseData};
 use GuzzleHttp\Exception\RequestException;
 use Spatie\LaravelData\Contracts\BaseData;
 
+/**
+ * Serviço de autenticação que processa requisições usando um cliente externo.
+ */
 class AuthService
 {
     /**
-     * Injeta o External Auth Service
+     * @param ExternalAuthClient $client Cliente externo de autenticação.
      */
     public function __construct(private ExternalAuthClient $client)
     {
     }
 
-    public function processAccount(ExternalAuthRequestData $data): BaseData
+    /**
+     * Processa a autenticação de uma conta externa.
+     *
+     * @param ExternalAuthRequestData $requestData Dados da requisição de autenticação.
+     * @return BaseData Dados da resposta de autenticação.
+     */
+    public function processAccount(ExternalAuthRequestData $requestData): BaseData
     {
         try {
-            $response = $this->client->post(
-                'auth',
-                [
-                    'json' => $data,
-                ]
-            );
+            $response = $this->client->post('auth', ['json' => $requestData]);
 
-            $responseDecoded = json_decode($response->getBody()->getContents(), true, flags: JSON_THROW_ON_ERROR);
-
-            if (!data_get($responseDecoded, 'success') && !data_get($responseDecoded, 'authorized')) {
-                return ExternalAuthResponseData::from([
-                    'success'    => $responseDecoded['success'],
-                    'authorized' => $responseDecoded['authorized'],
-                ]);
-            }
+            $responseData = json_decode($response->getBody()->getContents(), true, flags: JSON_THROW_ON_ERROR);
 
             return ExternalAuthResponseData::from([
-                'success'    => $responseDecoded['success'],
-                'authorized' => $responseDecoded['authorized'],
+                'success'    => $responseData['success'] ?? false,
+                'authorized' => $responseData['authorized'] ?? false,
             ]);
-
         } catch (RequestException $e) {
-            // Caso o serviço externo retorne erro 500, retorna um JSON com sucesso e autorização igual a false
             return ExternalAuthResponseData::from([
                 'success'    => true,
                 'authorized' => false,
             ]);
         } catch (\JsonException $e) {
-            throw new \RuntimeException('Invalid JSON response: ' . $e->getMessage());
+            throw new \RuntimeException('Resposta JSON inválida: ' . $e->getMessage());
         }
     }
 }

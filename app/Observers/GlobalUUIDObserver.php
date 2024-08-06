@@ -5,18 +5,26 @@ namespace App\Observers;
 use App\Models\SuperModel;
 use App\Services\UUIDService;
 
+/**
+ * Observer responsável por gerar UUIDs para modelos.
+ */
 class GlobalUUIDObserver
 {
     /**
-     * Observer criado para implementar a lógica de UUIDService nos models
+     * Cria uma nova instância do observer.
+     *
+     * @param \App\Services\UUIDService $uuidService Serviço para geração de UUIDs.
      */
     public function __construct(private readonly UUIDService $uuidService)
     {
     }
 
     /**
-     * Handle para o evento de "criação" de qualquer modelo.
-     * @param  SuperModel  $model
+     * Manipula o evento de criação de um modelo.
+     *
+     * Gera e atribui um UUID ao modelo se ainda não tiver um ID.
+     *
+     * @param SuperModel $model Modelo a ser observado.
      * @return void
      */
     public function creating(SuperModel &$model)
