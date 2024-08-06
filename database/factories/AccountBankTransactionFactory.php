@@ -18,8 +18,8 @@ class AccountBankTransactionFactory extends Factory
      */
     public function definition()
     {
-        $sender    = AccountBank::factory()->create();
-        $recipient = AccountBank::factory()->create();
+        $sender    = AccountBank::inRandomOrder()->first();
+        $recipient = AccountBank::where('id', '!=', $sender->id)->inRandomOrder()->first();
 
         return [
             'sender_id'    => $sender->id,

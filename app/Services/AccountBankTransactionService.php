@@ -42,11 +42,12 @@ class AccountBankTransactionService
         $balance = AccountBank::find($accountBankTransaction->sender_id)->balance;
 
         // atualiza o status como saldo insuficiente
-        if ($balance > $accountBankTransaction->amount) {
+        if ($balance < $accountBankTransaction->amount) {
             $accountBankTransaction->update(['status' => TransactionStatusEnum::InsufficientBalance]);
 
             return false;
         }
+
         DB::transaction(function () use ($data, $accountBankTransaction) {
             $sender    = AccountBank::findOrFail($data['sender_id']);
             $recipient = AccountBank::findOrFail($data['recipient_id']);
