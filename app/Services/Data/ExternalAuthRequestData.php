@@ -6,9 +6,10 @@ use Spatie\LaravelData\Data;
 
 class ExternalAuthRequestData extends Data
 {
-    public int $sender;
-
-    public int $receiver;
-
-    public int $amount;
+    public function __construct(
+        public int $sender,
+        public int $receiver,
+        public float $amount
+    ) {
+    }
 }

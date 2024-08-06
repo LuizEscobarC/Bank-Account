@@ -6,7 +6,9 @@ use Spatie\LaravelData\Data;
 
 class ExternalAuthResponseData extends Data
 {
-    public bool $success;
-
-    public bool $authorized;
+    public function __construct(
+        public bool $success,
+        public bool $authorized
+    ) {
+    }
 }
