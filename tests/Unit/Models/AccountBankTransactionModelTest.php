@@ -9,14 +9,22 @@ it('has the correct cast types', function () {
 
     expect($casts['id'])->toBe('string');
     expect($casts['amount'])->toBe('decimal:2');
-    expect($casts['scheduled_at'])->toBe('datetime');
+    expect($casts['scheduled_at'])->toBe('datetime:Y-m-d H:i:s');
     expect($casts['authorized'])->toBe('boolean');
 });
 
 it('has the correct fillable attributes', function () {
     $transaction = new AccountBankTransaction();
 
-    $fillable = ['sender_id', 'recipient_id', 'amount', 'scheduled_at'];
+    $fillable = [
+        'sender_id',
+        'recipient_id',
+        'status',
+        'authorized',
+        'amount',
+        'scheduled_at',
+        'processed_at',
+    ];
 
     expect($transaction->getFillable())->toEqual($fillable);
 });

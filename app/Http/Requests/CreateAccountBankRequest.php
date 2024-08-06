@@ -2,13 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Traits\ValidatesName;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAccountBank extends FormRequest
+class CreateAccountBankRequest extends FormRequest
 {
-    use ValidatesName;
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,7 +22,7 @@ class CreateAccountBank extends FormRequest
     public function rules(): array
     {
         return [
-            'name'    => $this->nameRules(),
+            'name'    => nameRules(),
             'balance' => 'nullable|numeric|min:0',
         ];
     }

@@ -15,12 +15,18 @@ return new class () extends Migration {
 
             $table->uuid('sender_id')->nullable();
             $table->foreign('sender_id')->references('id')->on('account_banks')->cascadeOnDelete();
-
             $table->uuid('recipient_id')->nullable();
             $table->foreign('recipient_id')->references('id')->on('account_banks')->cascadeOnDelete();
 
+            $table->enum(
+                'status',
+                ['pending', 'completed', 'insufficient-balance', 'not-authorized']
+            )->default('pending');
+
             $table->decimal('amount', 15, 2);
-            $table->timestamp('scheduled_at')->nullable();
+
+            $table->timestamp('scheduled_at')->nullable()->default(null);
+            $table->timestamp('processed_at')->nullable()->default(null);
             $table->timestamps();
         });
     }
@@ -30,6 +36,11 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('bank_account_transactions');
+        Schema::table('account_bank_transactions', function (Blueprint $table) {
+            $table->dropForeign(['sender_id']);
+            $table->dropForeign(['recipient_id']);
+        });
+
+        Schema::dropIfExists('account_bank_transactions');
     }
 };

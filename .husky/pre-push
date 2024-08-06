@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# Rodar o PHPStan e verificar erros
+echo "Rodando PHPStan..."
+./vendor/bin/phpstan
+if [ $? -ne 0 ]; then
+    echo "PHPStan encontrou erros. Corrija-os antes de fazer o commit. 😉"
+    exit 1
+fi
+
+# Rodar os testes usando Sail e verificar erros
+echo "Rodando testes com Sail..."
+./vendor/bin/sail artisan test --parallel
+if [ $? -ne 0 ]; then
+    echo "Alguns testes falharam. Corrija os erros antes de fazer o commit. 😞"
+    exit 1
+fi
+
+echo "Tudo pronto para o push. 🚀"
+exit 0
