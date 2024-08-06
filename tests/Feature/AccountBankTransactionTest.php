@@ -34,8 +34,8 @@ it('should be able to transfer balances between two accounts', function () {
 
 test('validation test', function (object $field) {
     // Arrange
-    $accountSender    = AccountBank::factory()->create(['balance' => 8000.50]);
-    $accountRecipient = AccountBank::factory()->create(['balance' => 8100.50]);
+    $accountSender    = AccountBank::factory()->create(['balance' => 8000]);
+    $accountRecipient = AccountBank::factory()->create(['balance' => 8100]);
 
     // Act
     $post = postJson(route('account-banks.transaction'), [
@@ -52,8 +52,8 @@ test('validation test', function (object $field) {
 
 test('if account balance is enough to transfer', function () {
     // Arrange
-    $accountSender    = AccountBank::factory()->create(['balance' => 8000.50]);
-    $accountRecipient = AccountBank::factory()->create(['balance' => 8100.50]);
+    $accountSender    = AccountBank::factory()->create(['balance' => 8000]);
+    $accountRecipient = AccountBank::factory()->create(['balance' => 8100]);
 
     $amountToSend = 8100;
 
@@ -70,8 +70,8 @@ test('if account balance is enough to transfer', function () {
 
 it('should register schedule at the given time', function () {
     // Arrange
-    $accountSender    = AccountBank::factory()->create(['balance' => 8000.50]);
-    $accountRecipient = AccountBank::factory()->create(['balance' => 8100.50]);
+    $accountSender    = AccountBank::factory()->create(['balance' => 8000]);
+    $accountRecipient = AccountBank::factory()->create(['balance' => 8100]);
 
     // Act
     $post = postJson(route('account-banks.transaction'), [
