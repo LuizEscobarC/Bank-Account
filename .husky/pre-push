@@ -10,11 +10,11 @@ fi
 
 # Rodar os testes usando Sail e verificar erros
 echo "Rodando testes com Sail..."
-sail artisan test --parallel
+./vendor/bin/sail artisan test --parallel
 if [ $? -ne 0 ]; then
     echo "Alguns testes falharam. Corrija os erros antes de fazer o commit. 😞"
     exit 1
 fi
 
-echo "Tudo pronto para o commit. 🚀"
+echo "Tudo pronto para o pull request. 🚀"
 exit 0
