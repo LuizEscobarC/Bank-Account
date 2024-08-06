@@ -1,19 +1,29 @@
 <?php
 
-use App\Jobs\ProcessScheduledTransactionsJob;
+use App\Enums\TransactionStatusEnum;
+use App\Jobs\{ProcessIndividualTransactionsJob, ProcessScheduledTransactionsJob};
+use App\Models\{AccountBankTransaction};
+use Carbon\Carbon;
+use Illuminate\Support\Facades\{Queue};
 
-// it('should schedule the ProcessScheduledTransactionsJob with parameters', function () {
-//     $schedule = app(\Illuminate\Console\Scheduling\Schedule::class);
+// Verificar se a transação agendada é processada corretamente na data programada.
+it('dispatches individual job instances for each scheduled transaction', function () {
+    $transacoes = AccountBankTransaction::factory()->count(3)->create([
+        'scheduled_at' => Carbon::now(),
+        'status'       => TransactionStatusEnum::Pending,
+        'processed_at' => null,
+    ]);
 
-//     $jobId = 123;
-//     $schedule->job(new ProcessScheduledTransactionsJob($jobId))->daily();
+    // Mock da facade Queue, despacha o job e após isso Verifica se o
+    // ProcessIndividualTransactionsJob foi despachado para cada transação
+    Queue::fake();
 
-//     $events = $schedule->events();
+    $job = new ProcessScheduledTransactionsJob();
+    $job->handle();
 
-//     // Assertions
-//     $this->assertNotEmpty($events);
-//     $this->assertContainsOnlyInstancesOf(\Illuminate\Console\Scheduling\Event::class, $events);
-//     $this->assertTrue($events[0]->isScheduled());
-//     $this->assertEquals(ProcessScheduledTransactionsJob::class, $events[0]->command());
-//     $this->assertEquals([$jobId], $events[0]->arguments());
-// });
+    foreach ($transacoes as $transacao) {
+        Queue::assertPushed(ProcessIndividualTransactionsJob::class, function ($job) use ($transacao) {
+            return $job->accountBankTransaction->is($transacao);
+        });
+    }
+});
