@@ -41,8 +41,24 @@ class CreateAccountBankRequest extends FormRequest
     {
         // Ajusta o retorno da resposta para incluir apenas o primeiro erro
         throw new ValidationException($validator, response()->json([
-            'message' => 'The given data was invalid.',
+            'message' => 'OS dados enviados não são válidos.',
             'errors'  => $validator->errors(),
         ], 422));
+    }
+
+    /**
+     * Get the custom validation messages for the request.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required'    => 'O campo nome é obrigatório.',
+            'name.string'      => 'O campo nome deve ser uma string.',
+            'balance.numeric'  => 'O saldo deve ser um número.',
+            'balance.min'      => 'O saldo deve ser maior ou igual a zero.',
+            'balance.nullable' => 'O saldo pode ser nulo.',
+        ];
     }
 }

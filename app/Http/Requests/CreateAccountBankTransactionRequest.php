@@ -87,7 +87,7 @@ class CreateAccountBankTransactionRequest extends FormRequest
     {
         // Ajusta o retorno da resposta para incluir apenas o primeiro erro
         throw new ValidationException($validator, response()->json([
-            'message' => 'The given data was invalid.',
+            'message' => 'OS dados enviados não são válidos.',
             'errors'  => $validator->errors(),
         ], 422));
     }

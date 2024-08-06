@@ -13,7 +13,6 @@ class AccountBankTransaction extends SuperModel
         'sender_id',
         'recipient_id',
         'status',
-        'authorized',
         'amount',
         'scheduled_at',
         'processed_at',
@@ -21,11 +20,21 @@ class AccountBankTransaction extends SuperModel
 
     protected $casts = [
         'status'       => TransactionStatusEnum::class,
-        'authorized'   => 'boolean',
         'amount'       => 'decimal:2',
         'scheduled_at' => 'datetime:Y-m-d H:i:s',
         'processed_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the status attribute.
+     *
+     * @return \App\Enums\TransactionStatusEnum
+     */
+    public function getStatusAttribute($value)
+    {
+        // Return a default value or handle the null case
+        return TransactionStatusEnum::tryFrom($value) ?? TransactionStatusEnum::Pending;
+    }
 
     public function authorizeTransaction()
     {

@@ -1,0 +1,122 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:80"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "de66bb68-a47a-4f6a-8b4f-bdf13eb55ad1",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Account Bank",
+            "description": "\nAPIs para criar e gerenciar contas banc\u00e1rias.",
+            "item": [
+                {
+                    "name": "Cria uma nova conta banc\u00e1ria.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/account-banks\/store",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/account-banks\/store"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"balance\":\"1000\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"id\": \"uuid\",\n    \"name\": \"John Doe\",\n    \"balance\": 1000,\n    \"created_at\": \"2024-08-06T00:00:00.000000Z\",\n    \"updated_at\": \"2024-08-06T00:00:00.000000Z\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"errors\": {\n        \"name\": [\"O campo nome \u00e9 obrigat\u00f3rio.\"],\n        \"balance\": [\n            \"O saldo deve ser um n\u00famero.\",\n            \"O saldo deve ser maior ou igual a zero.\"\n        ]\n    }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Account Bank Transactions",
+            "description": "\nAPIs para gerenciar transa\u00e7\u00f5es entre contas banc\u00e1rias.",
+            "item": [
+                {
+                    "name": "Realiza uma transfer\u00eancia de valores entre contas.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/account-banks\/transfer",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/account-banks\/transfer"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"sender_id\":\"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",\"recipient_id\":\"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",\"amount\":\"1000.00\",\"scheduled_at\":\"2024-08-07\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"id\": \"uuid\",\n    \"amount\": 1000.00,\n    \"sender_id\": \"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",\n    \"recipient_id\": \"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",\n    \"status\": \"completed\",\n    \"scheduled_at\": \"2024-08-07T00:00:00.000000Z\",\n    \"created_at\": \"2024-08-06T00:00:00.000000Z\",\n    \"updated_at\": \"2024-08-06T00:00:00.000000Z\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"errors\": {\n        \"amount\": [\n            \"O valor da transa\u00e7\u00e3o \u00e9 obrigat\u00f3rio.\",\n            \"O valor da transa\u00e7\u00e3o deve ser um n\u00famero.\",\n            \"O valor da transa\u00e7\u00e3o deve ser maior ou igual a zero.\"\n        ],\n        \"sender_id\": [\n            \"O campo de ID do remetente \u00e9 obrigat\u00f3rio.\",\n            \"O ID do remetente deve ser um UUID v\u00e1lido.\",\n            \"A conta do remetente n\u00e3o foi encontrada.\"\n        ],\n        \"recipient_id\": [\n            \"O campo de ID do destinat\u00e1rio \u00e9 obrigat\u00f3rio.\",\n            \"O ID do destinat\u00e1rio deve ser um UUID v\u00e1lido.\",\n            \"A conta do destinat\u00e1rio n\u00e3o foi encontrada.\"\n        ],\n        \"scheduled_at\": [\n            \"A data e hora agendadas devem estar no formato Y-m-d.\",\n            \"A data e hora agendadas devem ser no futuro.\"\n        ]\n    }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
