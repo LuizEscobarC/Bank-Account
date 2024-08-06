@@ -1,18 +1,21 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Rodar o phpstan
+# Rodar o PHPStan e verificar erros
+echo "Rodando PHPStan..."
 ./vendor/bin/phpstan
 if [ $? -ne 0 ]; then
-    echo "Eu sei que isso é chato só que deu ruim aqui com PHPSTAN... 😉";
-    exit 1;
-fi;
+    echo "PHPStan encontrou erros. Corrija-os antes de fazer o commit. 😉"
+    exit 1
+fi
 
-# rodar os testes
-./vendor/bin/sail artisan test --parallel | php
+# Rodar os testes usando Sail e verificar erros
+echo "Rodando testes com Sail..."
+sail artisan test --parallel
 if [ $? -ne 0 ]; then
-    echo "Não é que eu seja ruiom mas deu ruim aqui com algum teste... :^)";
-    exit 1;
-fi;
+    echo "Alguns testes falharam. Corrija os erros antes de fazer o commit. 😞"
+    exit 1
+fi
 
-exit 0;
+echo "Tudo pronto para o commit. 🚀"
+exit 0
