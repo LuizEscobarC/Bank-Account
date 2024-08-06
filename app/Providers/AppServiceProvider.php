@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
-use App\Models\{SuperModel};
-use App\Observers\{GlobalUUIDObserver};
-use App\Services\{AccountBankService,UUIDService};
+use App\Models\SuperModel;
+use App\Observers\GlobalUUIDObserver;
+use App\Services\{
+    AccountBankService,
+    UUIDService
+};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 

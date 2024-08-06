@@ -3,7 +3,10 @@
 namespace App\Services;
 
 use App\Enums\TransactionStatusEnum;
-use App\Models\{AccountBank, AccountBankTransaction};
+use App\Models\{
+    AccountBank,
+    AccountBankTransaction
+};
 use Illuminate\Support\Facades\DB;
 
 class AccountBankTransactionService
@@ -39,6 +42,11 @@ class AccountBankTransactionService
      */
     public function updateAccountsBalance(array $data, AccountBankTransaction $accountBankTransaction): bool
     {
+        // validar a autenticação
+        if (false) {
+            throw new AuthenticatedException('Esta ação não foi autenticada');
+        }
+
         $balance = AccountBank::find($accountBankTransaction->sender_id)->balance;
 
         // atualiza o status como saldo insuficiente

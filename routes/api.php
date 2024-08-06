@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\{AccountBankController, AccountBankTransactionController};
+use App\Http\Controllers\{
+    AccountBankController,
+    AccountBankTransactionController
+};
 use Illuminate\Support\Facades\Route;
 
 // Define a rota para criar uma nova conta bancária

@@ -3,7 +3,8 @@
 # Rodar o PHPStan e verificar erros
 echo "\033[1mRodando PHPStan...
      (　-_･) ︻デ═一 ▸ Estou verificando suas tipagens\033[0m\n\n"
-clear
+sleep 1;
+
 ./vendor/bin/phpstan
 if [ $? -ne 0 ]; then
     echo "\033[1mPHPStan encontrou erros. Corrija-os antes de fazer o commit. 😉\033[0m"

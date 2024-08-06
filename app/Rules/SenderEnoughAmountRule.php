@@ -12,7 +12,7 @@ class SenderEnoughAmountRule implements ValidationRule
     {
     }
     /**
-     * Regra de validação para saldo insuficiente
+     * Regra de validação para saldo (balance) insuficiente
      *
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */

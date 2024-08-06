@@ -9,8 +9,7 @@ class AccountBankTransactionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * Obtém todos os IDs de contas bancárias existentes
-     * Cria transações bancárias usando IDs referenciados
+     * Cria transações bancárias usando IDs
      */
     public function run(): void
     {

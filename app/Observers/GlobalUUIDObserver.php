@@ -7,14 +7,11 @@ use App\Services\UUIDService;
 
 class GlobalUUIDObserver
 {
-    protected $uuidService;
-
     /**
      * Observer criado para implementar a lógica de UUIDService nos models
      */
-    public function __construct(UUIDService $uuidService)
+    public function __construct(private readonly UUIDService $uuidService)
     {
-        $this->uuidService = $uuidService;
     }
 
     /**

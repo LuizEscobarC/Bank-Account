@@ -25,7 +25,11 @@ class AccountBankController extends Controller
 
             return response()->json($accountBank, 201);
         } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
+            response()->json([
+                'message' => $e->getMessage(),
+            ], 403);
+        } catch (\Exception $e) {
+            throw $e;
         }
     }
 }
