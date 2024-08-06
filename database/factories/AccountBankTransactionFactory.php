@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\TransactionStatusEnum;
 use App\Models\{AccountBank, AccountBankTransaction};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,12 +24,9 @@ class AccountBankTransactionFactory extends Factory
         return [
             'sender_id'    => $sender->id,
             'recipient_id' => $recipient->id,
-            'status'       => $this->faker->randomElement([
-                'pending', 'completed', 'insufficient-balance', 'not-authorized',
-            ]),
+            'status'       => TransactionStatusEnum::Pending,
             'amount'       => $this->faker->randomFloat(2, 0, 10000),
-            'scheduled_at' => $this->faker->dateTimeBetween('now', '+1 week')->format('Y-m-d H:i:s'),
-            'processed_at' => $this->faker->dateTimeBetween('now', '+1 week')->format('Y-m-d H:i:s'),
+            'scheduled_at' => now(),
         ];
     }
 }

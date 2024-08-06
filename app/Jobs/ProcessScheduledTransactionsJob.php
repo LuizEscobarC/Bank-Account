@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Enums\TransactionStatusEnum;
 use App\Models\AccountBankTransaction;
 use App\Services\AccountBankTransactionService;
 use Carbon\Carbon;
@@ -20,7 +21,9 @@ class ProcessScheduledTransactionsJob implements ShouldQueue
         $startOfDay = Carbon::now()->startOfDay();
         $endOfDay   = Carbon::now()->endOfDay();
 
-        $transactions = AccountBankTransaction::whereBetween('scheduled_at', [$startOfDay, $endOfDay])->get();
+        $transactions = AccountBankTransaction::whereBetween('scheduled_at', [$startOfDay, $endOfDay])
+        ->whereNull('processed_at')->where(['status' => TransactionStatusEnum::Pending])
+        ->get();
 
         foreach ($transactions as $transaction) {
             ProcessIndividualTransactionsJob::dispatch($transaction, new AccountBankTransactionService());

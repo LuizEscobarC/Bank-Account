@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\{AccountBank, AccountBankTransaction};
+use App\Models\{AccountBankTransaction};
 use App\Services\AccountBankTransactionService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -24,16 +24,10 @@ class ProcessIndividualTransactionsJob implements ShouldQueue
      */
     public function handle()
     {
-        // usar resolve()
-        // separar para um service - CHAMAR O SERVICE
-        $balance = AccountBank::find($this->accountBankTransaction->sender_id)->balance;
-
-        if ($balance > $this->accountBankTransaction->amount) {
-            $this->accountBankTransactionService->updateAccountsBalance([
-                'amount'       => $this->accountBankTransaction->amount,
-                'sender_id'    => $this->accountBankTransaction->sender_id,
-                'recipient_id' => $this->accountBankTransaction->recipient_id,
-            ], $this->accountBankTransaction);
-        }
+        $this->accountBankTransactionService->updateAccountsBalance([
+            'amount'       => $this->accountBankTransaction->amount,
+            'sender_id'    => $this->accountBankTransaction->sender_id,
+            'recipient_id' => $this->accountBankTransaction->recipient_id,
+        ], $this->accountBankTransaction);
     }
 }

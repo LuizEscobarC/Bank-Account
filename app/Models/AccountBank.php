@@ -17,4 +17,14 @@ class AccountBank extends SuperModel
         'id'      => 'string',
         'balance' => 'decimal:2',
     ];
+
+    public function incrementBalance(float $amount): void
+    {
+        $this->increment('balance', $amount);
+    }
+
+    public function decrementBalance(float $amount): void
+    {
+        $this->decrement('balance', $amount);
+    }
 }
