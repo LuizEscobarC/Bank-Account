@@ -6,14 +6,14 @@ use function Pest\Laravel\{assertDatabaseHas, postJson};
 
 it('should be able to transfer balances between two accounts', function () {
     // Arrange
-    $accountSender    = AccountBank::factory()->create(['balance' => 8000.55]);
-    $accountRecipient = AccountBank::factory()->create(['balance' => 8100.45]);
+    $accountSender    = AccountBank::factory()->create(['balance' => 8000]);
+    $accountRecipient = AccountBank::factory()->create(['balance' => 8100]);
 
     // Act
     $post = postJson(route('account-banks.transaction'), [
         'sender_id'    => $accountSender->id,
         'recipient_id' => $accountRecipient->id,
-        'amount'       => 3500.00,
+        'amount'       => 3500,
     ]);
 
     $resultBalanceSender    = $accountSender->balance - 3500;
