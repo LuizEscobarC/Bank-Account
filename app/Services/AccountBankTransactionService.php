@@ -7,10 +7,15 @@ use App\Models\{
     AccountBank,
     AccountBankTransaction
 };
+use App\Services\Auth\AuthService;
+use App\Services\Data\ExternalAuthRequestData;
 use Illuminate\Support\Facades\DB;
 
 class AccountBankTransactionService
 {
+    public function __construct(protected AuthService $authService)
+    {
+    }
     /**
      * Tranfere um valor de uma conta para outra.
      *
@@ -19,22 +24,37 @@ class AccountBankTransactionService
      */
     public function create(array $data): ?AccountBankTransaction
     {
-        return DB::transaction(function () use ($data) {
+        // é agendamento futuro
+        $accountBankTransaction = AccountBankTransaction::create($data);
+
+        if (!empty($data['scheduled_at'])) {
+            return $accountBankTransaction;
+        }
+
+        $responseEsternalAuth = $this->processExternalAuth($data);
+
+        DB::transaction(function () use ($data, &$accountBankTransaction, $responseEsternalAuth) {
             // Encontra as contas e realiza a transação
             $sender    = AccountBank::findOrFail($data['sender_id']);
             $recipient = AccountBank::findOrFail($data['recipient_id']);
 
-            // Atualiza o saldo das contas envolvidas na transação
-            $sender->decrementBalance($data['amount']);
-            $recipient->incrementBalance($data['amount']);
+            // Valida se o saldo é suficiente
+            if ($sender->balance < $data['amount']) {
+                throw new \Exception('Saldo insuficiente para a transação.');
+            }
 
-            // Cria e retorna a transação
-            return AccountBankTransaction::create($data);
+            // Atualiza os saldos
+            if ($responseEsternalAuth) {
+                $this->transferAmount($sender, $recipient, $data['amount']);
+                $accountBankTransaction->authorizeTransaction();
+            }
         });
+
+        return $accountBankTransaction;
     }
 
     /**
-     * Atualiza o saldo das contas após a transação ser processada.
+     * Atualiza o saldo das contas após a transação ser processada pela fila.
      *
      * @param array $data
      * @param AccountBankTransaction $accountBankTransaction
@@ -42,33 +62,67 @@ class AccountBankTransactionService
      */
     public function updateAccountsBalance(array $data, AccountBankTransaction $accountBankTransaction): bool
     {
-        // validar a autenticação
-        // if (false) {
-        //     throw new AuthenticationException('Esta ação não foi autenticada');
-        // }
-
-        $balance = AccountBank::find($accountBankTransaction->sender_id)->balance;
+        $sender  = AccountBank::find($accountBankTransaction->sender_id);
+        $balance = $sender->balance;
 
         // atualiza o status como saldo insuficiente
         if ($balance < $accountBankTransaction->amount) {
-            $accountBankTransaction->update(['status' => TransactionStatusEnum::InsufficientBalance]);
+            $accountBankTransaction->update(['status' => TransactionStatusEnum::InsufficientBalance->value]);
 
             return false;
         }
 
-        DB::transaction(function () use ($data, $accountBankTransaction) {
+        $responseExternalAuth = $this->processExternalAuth($data);
+
+        if (!$responseExternalAuth) {
+            $accountBankTransaction->markNotAuthorized();
+        }
+
+        DB::transaction(function () use ($data, $accountBankTransaction, $responseExternalAuth) {
             $sender    = AccountBank::findOrFail($data['sender_id']);
             $recipient = AccountBank::findOrFail($data['recipient_id']);
 
             // Atualiza o saldo das contas envolvidas na transação
-            $sender->decrementBalance($data['amount']);
-            $recipient->incrementBalance($data['amount']);
+            $this->transferAmount($sender, $recipient, $data['amount']);
 
-            $accountBankTransaction->update(['processed_at' => now()]);
-            $accountBankTransaction->update(['status' => TransactionStatusEnum::Completed]);
+            $accountBankTransaction->update([
+                'processed_at' => now(),
+                'status'       => TransactionStatusEnum::Completed->value,
+            ]);
 
         });
 
         return true;
+    }
+
+    /**
+     * Processa a autenticação externa.
+     *
+     * @param array $data
+     * @return bool
+     */
+    private function processExternalAuth(array $data): bool
+    {
+        $dtoExternalRequestData = new ExternalAuthRequestData(
+            sender: $data['sender_id'],
+            receiver: $data['recipient_id'],
+            amount: $data['amount']
+        );
+
+        return $this->authService->processAccount($dtoExternalRequestData)
+        ->authorized;
+    }
+
+    /**
+     * Realiza a transferência de valor entre duas contas.
+     *
+     * @param AccountBank $sender
+     * @param AccountBank $recipient
+     * @param float $amount
+     */
+    private function transferAmount(AccountBank $sender, AccountBank $recipient, float $amount): void
+    {
+        $sender->decrementBalance($amount);
+        $recipient->incrementBalance($amount);
     }
 }

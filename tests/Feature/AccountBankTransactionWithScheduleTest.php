@@ -7,8 +7,8 @@ use function Pest\Laravel\assertDatabaseHas;
 // Verificar se uma transação pode ser agendada para uma data futura válida.
 it('should allow scheduling a transaction for a valid future date', function () {
     // arrange -> pega as contas
-    $accountSender    = AccountBank::factory()->create(['balance' => 8000.50]);
-    $accountRecipient = AccountBank::factory()->create(['balance' => 8100.50]);
+    $accountSender    = AccountBank::factory()->create(['balance' => 8000.55]);
+    $accountRecipient = AccountBank::factory()->create(['balance' => 8100.55]);
 
     // act -> agendar a transferência para uma data futura válida
     $response = $this->postJson(route('account-banks.transaction'), [
@@ -30,7 +30,7 @@ test('schedule validate to have certain that is a future date', function () {
     $accountRecipient = AccountBank::factory()->create(['balance' => 8100.50]);
 
     // Testa uma data no futuro
-    $futureDate = (new DateTime('now'))->add(new DateInterval('P1D'))->format('Y-m-d H:i:s');
+    $futureDate = (new DateTime('now'))->add(new DateInterval('P1D'))->format('Y-m-d');
     $this->postJson(route('account-banks.transaction'), [
         'sender_id'    => $accountSender->id,
         'recipient_id' => $accountRecipient->id,

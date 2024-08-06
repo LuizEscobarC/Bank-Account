@@ -30,12 +30,16 @@ class AccountBankTransaction extends SuperModel
     public function authorizeTransaction()
     {
         $this->update([
-            'authorized'   => true,
-            'status'       => TransactionStatusEnum::Completed->value,
             'processed_at' => now(),
+            'status'       => TransactionStatusEnum::Completed->value,
         ]);
     }
 
+    /**
+     *
+     * Not Authorized
+     *
+     */
     public function markInsufficientBalance()
     {
         $this->update([
@@ -43,6 +47,9 @@ class AccountBankTransaction extends SuperModel
         ]);
     }
 
+    /**
+     * Not Authorized
+     */
     public function markNotAuthorized()
     {
         $this->update([

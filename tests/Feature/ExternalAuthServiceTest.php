@@ -1,16 +1,20 @@
 <?php
 
+use App\Models\AccountBank;
 use App\Services\Auth\AuthService;
 use App\Services\Auth\Clients\ExternalAuthClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
+use Mockery;
 
 /**
- * Mocks para os serviços de autenticaçãoe
+ * Mocks para os serviços de autenticação
  */
 beforeEach(function () {
     $this->clientMock  = Mockery::mock(ExternalAuthClient::class);
     $this->authService = new AuthService($this->clientMock);
+    $this->sender      = AccountBank::factory()->create();
+    $this->reciever    = AccountBank::factory()->create();
 });
 
 // teste de autorização externa permitida
@@ -24,14 +28,16 @@ test('processAccount success', function () {
             'authorized' => true,
         ], JSON_THROW_ON_ERROR)));
 
-    // Act
-    $response = $this->authService->processAccount([
-        'sender_id'    => 1,
-        'recipient_id' => 2,
-        'amount'       => 100,
-    ]);
+    $requestData = new \App\Services\Data\ExternalAuthRequestData(
+        sender:  $this->sender->id,
+        receiver: $this->reciever->id,
+        amount: 100
+    );
 
-    // Arrange
+    // Act
+    $response = $this->authService->processAccount($requestData);
+
+    // Assert
     expect($response->success)->toBeTrue();
     expect($response->authorized)->toBeTrue();
 });
@@ -46,12 +52,15 @@ test('processAccount failure', function () {
             'success'    => true,
             'authorized' => false,
         ], JSON_THROW_ON_ERROR)));
+
+    $requestData = new \App\Services\Data\ExternalAuthRequestData(
+        sender:  $this->sender->id,
+        receiver: $this->reciever->id,
+        amount: 100
+    );
+
     // Act
-    $response = $this->authService->processAccount([
-        'sender_id'    => 1,
-        'recipient_id' => 2,
-        'amount'       => 100,
-    ]);
+    $response = $this->authService->processAccount($requestData);
 
     // Assert
     expect($response->success)->toBeTrue();
@@ -72,14 +81,16 @@ test('processAccount service returns 500 Internal Server Error', function () {
             ], JSON_THROW_ON_ERROR))
         ));
 
+    $requestData = new \App\Services\Data\ExternalAuthRequestData(
+        sender:  $this->sender->id,
+        receiver: $this->reciever->id,
+        amount: 100
+    );
+
     // Act
-    $response = $this->authService->processAccount([
-        'sender_id'    => 1,
-        'recipient_id' => 2,
-        'amount'       => 100,
-    ]);
+    $response = $this->authService->processAccount($requestData);
 
     // Assert
-    expect($response->success)->toBeTrue();
-    expect($response->authorized)->toBeFalse();
+    expect($response->success)->toBeTrue();  // Espera-se que o sucesso seja falso
+    expect($response->authorized)->toBeFalse(); // Espera-se que a autorização seja falsa
 });

@@ -16,17 +16,13 @@ class AuthService
     {
     }
 
-    public function processAccount(array $data): BaseData
+    public function processAccount(ExternalAuthRequestData $data): BaseData
     {
         try {
             $response = $this->client->post(
                 'auth',
                 [
-                    'json' => ExternalAuthRequestData::from([
-                        'sender'   => $data['sender_id'],
-                        'receiver' => $data['recipient_id'],
-                        'amount'   => $data['amount'],
-                    ]),
+                    'json' => $data,
                 ]
             );
 

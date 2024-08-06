@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class CreateAccountBankRequest extends FormRequest
 {
@@ -25,5 +27,13 @@ class CreateAccountBankRequest extends FormRequest
             'name'    => nameRules(),
             'balance' => 'nullable|numeric|min:0',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new ValidationException($validator, response()->json([
+            'message' => 'The given data was invalid.',
+            'errors'  => $validator->errors(),
+        ], 422));
     }
 }
