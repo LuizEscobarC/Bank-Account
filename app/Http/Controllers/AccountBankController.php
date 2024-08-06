@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{CreateAccountBank, CreateAccountBankRequest};
+use App\Http\Requests\{CreateAccountBankRequest};
 use App\Services\AccountBankService;
 use Illuminate\Validation\ValidationException;
 
@@ -11,7 +11,7 @@ class AccountBankController extends Controller
     /**
      * Cria uma nova conta bancária.
      *
-     * @param CreateAccountBank $request
+     * @param CreateAccountBankRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(
