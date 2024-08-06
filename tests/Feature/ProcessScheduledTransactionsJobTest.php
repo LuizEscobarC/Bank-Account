@@ -1,11 +1,19 @@
 <?php
 
 use App\Enums\TransactionStatusEnum;
-use App\Jobs\{ProcessIndividualTransactionsJob, ProcessScheduledTransactionsJob};
-use App\Models\{AccountBank, AccountBankTransaction};
+use App\Jobs\{
+    ProcessIndividualTransactionsJob,
+    ProcessScheduledTransactionsJob};
+use App\Models\{
+    AccountBank,
+    AccountBankTransaction
+};
 use App\Services\AccountBankTransactionService;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\{DB, Queue};
+use Illuminate\Support\Facades\{
+    DB,
+    Queue
+};
 
 // Verificar se a transação agendada é processada corretamente na data programada.
 it('dispatches individual job instances for each scheduled transaction', function () {
@@ -33,7 +41,8 @@ it('dispatches individual job instances for each scheduled transaction', functio
 it('checks if the account of the sender has sufficient funds on the scheduled execution date', function () {
     $contaRemetente    = AccountBank::factory()->create(['balance' => 1000.00]);
     $contaDestinatario = AccountBank::factory()->create(['balance' => 500.00]);
-    $transacao         = AccountBankTransaction::factory()->create([
+
+    $transacao = AccountBankTransaction::factory()->create([
         'amount'       => 100.00,
         'sender_id'    => $contaRemetente->id,
         'recipient_id' => $contaDestinatario->id,
