@@ -26,7 +26,6 @@ class AccountBankTransactionFactory extends Factory
             'status'       => $this->faker->randomElement([
                 'pending', 'completed', 'insufficient-balance', 'not-authorized',
             ]),
-            'authorized'   => $this->faker->boolean,
             'amount'       => $this->faker->randomFloat(2, 0, 10000),
             'scheduled_at' => $this->faker->dateTimeBetween('now', '+1 week')->format('Y-m-d H:i:s'),
             'processed_at' => $this->faker->dateTimeBetween('now', '+1 week')->format('Y-m-d H:i:s'),

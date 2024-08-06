@@ -36,11 +36,11 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        // Remover a chave estrangeira antes de excluir a tabela
         Schema::table('account_bank_transactions', function (Blueprint $table) {
-            $table->dropForeign(['account_bank_id']);
+            $table->dropForeign(['sender_id']);
+            $table->dropForeign(['recipient_id']);
         });
 
-        Schema::dropIfExists('bank_account_transactions');
+        Schema::dropIfExists('account_bank_transactions');
     }
 };

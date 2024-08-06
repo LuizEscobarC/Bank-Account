@@ -17,8 +17,8 @@ class AccountBankFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'    => fake()->company,
-            'balance' => fake()->randomFloat(2, 0, 10000),
+            'name'    => $this->faker->company,
+            'balance' => $this->faker->randomFloat(2, 0, 10000),
         ];
     }
 }

@@ -5,10 +5,9 @@ namespace App\Models;
 use App\Enums\TransactionStatusEnum;
 use App\Observers\GlobalUUIDObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use Illuminate\Database\Eloquent\Model;
 
 #[ObservedBy([GlobalUUIDObserver::class])]
-class AccountBankTransaction extends Model
+class AccountBankTransaction extends SuperModel
 {
     protected $fillable = [
         'sender_id',
