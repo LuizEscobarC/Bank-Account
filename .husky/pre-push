@@ -16,5 +16,5 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Tudo pronto para o pull request. 🚀"
+echo "Tudo pronto para o push. 🚀"
 exit 0
