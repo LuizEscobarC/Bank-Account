@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-. "$(dirname "$0")/h"
 
 # Rodar o phpstan
 ./vendor/bin/phpstan
