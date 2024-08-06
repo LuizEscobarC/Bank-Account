@@ -71,16 +71,16 @@ it('sets initial balance to zero if not provided', function () {
 });
 
 // simula erro no servidor
-// it('handles internal server errors gracefully', function () {
-//     // Simula uma falha no servidor
-//     $this->mock(\App\Services\AccountBankService::class, function ($mock) {
-//         $mock->shouldReceive('create')->andThrow(new \Exception('Server error'));
-//     });
+it('handles internal server errors gracefully', function () {
+    // Simula uma falha no servidor
+    $this->mock(\App\Services\AccountBankService::class, function ($mock) {
+        $mock->shouldReceive('create')->andThrow(new \Exception('Server error'));
+    });
 
-//     $response = $this->postJson(route('account-banks.create'), [
-//         'name'    => 'Error Account',
-//         'balance' => 0.00,
-//     ]);
+    $response = $this->postJson(route('account-banks.create'), [
+        'name'    => 'Error Account',
+        'balance' => 0.00,
+    ]);
 
-//     $response->assertStatus(500); // Verifica o erro do servidor interno
-// });
+    $response->assertStatus(500); // Verifica o erro do servidor interno
+});

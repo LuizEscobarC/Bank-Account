@@ -4,32 +4,31 @@ use App\Models\AccountBank;
 
 use function Pest\Laravel\assertDatabaseHas;
 
-// Verificar se uma transação pode ser agendada para uma data futura válida.
+// Testa se uma transação pode ser agendada para uma data futura válida
 it('should allow scheduling a transaction for a valid future date', function () {
-    // arrange -> pega as contas
+    // Arrange:
     $accountSender    = AccountBank::factory()->create(['balance' => 8000.55]);
     $accountRecipient = AccountBank::factory()->create(['balance' => 8100.55]);
 
-    // act -> agendar a transferência para uma data futura válida
+    // Act:
     $response = $this->postJson(route('account-banks.transaction'), [
         'sender_id'    => $accountSender->id,
         'recipient_id' => $accountRecipient->id,
         'amount'       => 3500,
-        'scheduled_at' => (new DateTime('now'))->sub(new DateInterval('P1D'))
-        ->format('Y-m-d H:i:s'),
+        'scheduled_at' => (new DateTime('now'))->sub(new DateInterval('P1D'))->format('Y-m-d H:i:s'),
     ]);
 
-    // assert -> verificar se a resposta não contém erros de validação
+    // Assert: Verifica se há erros de validação na resposta
     $response->assertJsonValidationErrors(['scheduled_at']);
 });
 
-// Testar a validação para garantir que a data de execução seja posterior à data atual.
+// Testa a validação para garantir que a data de execução seja uma data futura válida
 test('schedule validate to have certain that is a future date', function () {
-    // Arrange: Cria contas para enviar e receber
+    // Arrange:
     $accountSender    = AccountBank::factory()->create(['balance' => 8000.50]);
     $accountRecipient = AccountBank::factory()->create(['balance' => 8100.50]);
 
-    // Testa uma data no futuro
+    // Act:
     $futureDate = (new DateTime('now'))->add(new DateInterval('P1D'))->format('Y-m-d');
     $this->postJson(route('account-banks.transaction'), [
         'sender_id'    => $accountSender->id,
@@ -38,7 +37,7 @@ test('schedule validate to have certain that is a future date', function () {
         'scheduled_at' => $futureDate,
     ]);
 
-    // Assert: Código de status para sucesso
+    // Assert: Verifica se a transação foi registrada na base de dados com a data futura
     assertDatabaseHas('account_bank_transactions', [
         'sender_id'    => $accountSender->id,
         'recipient_id' => $accountRecipient->id,
