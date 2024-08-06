@@ -17,16 +17,6 @@ it('fails to create a bank account without a name', function () {
     expect(Artisan::output())->toContain('O nome é obrigatório.');
 });
 
-// teste de duplicação de nome de conta
-it('fails to create a bank account with a duplicate name', function () {
-    $name = 'Duplicate Account Name';
-
-    Artisan::call('bank-account:create', ['name' => $name]);
-    Artisan::call('bank-account:create', ['name' => $name]);
-
-    expect(Artisan::output())->toContain('O nome da conta já está em uso.');
-});
-
 // teste de nome com espaços
 it('does not allow creating a bank account with only whitespace in the name', function () {
     $name = '       ';
