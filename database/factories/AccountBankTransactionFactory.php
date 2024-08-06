@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\AccountBank;
+use App\Models\{AccountBank, AccountBankTransaction};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AccountBankTransaction>
+ * @extends Factory<AccountBankTransaction>
  */
 class AccountBankTransactionFactory extends Factory
 {
@@ -17,14 +17,19 @@ class AccountBankTransactionFactory extends Factory
      */
     public function definition()
     {
-        $senderId    = AccountBank::factory()->create();
-        $recipientId = AccountBank::factory()->create();
+        $sender    = AccountBank::factory()->create();
+        $recipient = AccountBank::factory()->create();
 
         return [
-            'sender_id'    => $senderId,
-            'recipient_id' => $recipientId,
-            'amount'       => fake()->randomFloat(2, 0, 10000),
-            'scheduled_at' => now()->format('Y-m-d H:i:s'),
+            'sender_id'    => $sender->id,
+            'recipient_id' => $recipient->id,
+            'status'       => $this->faker->randomElement([
+                'pending', 'completed', 'insufficient-balance', 'not-authorized',
+            ]),
+            'authorized'   => $this->faker->boolean,
+            'amount'       => $this->faker->randomFloat(2, 0, 10000),
+            'scheduled_at' => $this->faker->dateTimeBetween('now', '+1 week')->format('Y-m-d H:i:s'),
+            'processed_at' => $this->faker->dateTimeBetween('now', '+1 week')->format('Y-m-d H:i:s'),
         ];
     }
 }

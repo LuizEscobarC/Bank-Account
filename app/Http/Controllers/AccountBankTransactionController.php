@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAccountBankTransaction;
+use App\Http\Requests\CreateAccountBankTransactionRequest;
 use App\Services\AccountBankTransactionService;
 
 class AccountBankTransactionController extends Controller
 {
-    public function __construct(
-        private readonly AccountBankTransactionService $accountBankTransactionService
+    public function tranferAmount(
+        CreateAccountBankTransactionRequest $request,
+        AccountBankTransactionService $accountBankTransactionService
     ) {
-    }
-
-    public function tranferAmount(CreateAccountBankTransaction $request)
-    {
-        $accountBank = $this->accountBankTransactionService->create(
+        $accountBank = $accountBankTransactionService->create(
             $request->validated()
         );
 

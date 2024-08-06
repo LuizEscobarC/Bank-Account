@@ -7,7 +7,7 @@
  -  Testar a validação para garantir que a data de execução seja posterior à data atual.
  -  Verificar se a transação agendada é processada corretamente na data programada.
  -  Testar se a conta remetente tem saldo suficiente na data de execução agendada.
- * - status completed, insuficient-balance , authorized, not-authorized
+ *
  *
  */
 
