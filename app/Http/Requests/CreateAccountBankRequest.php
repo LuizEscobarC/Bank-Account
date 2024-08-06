@@ -29,8 +29,17 @@ class CreateAccountBankRequest extends FormRequest
         ];
     }
 
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
     protected function failedValidation(Validator $validator)
     {
+        // Ajusta o retorno da resposta para incluir apenas o primeiro erro
         throw new ValidationException($validator, response()->json([
             'message' => 'The given data was invalid.',
             'errors'  => $validator->errors(),
