@@ -78,7 +78,7 @@ class AccountBankTransactionService
             $accountBankTransaction->markNotAuthorized();
         }
 
-        DB::transaction(function () use ($data, $accountBankTransaction, $responseExternalAuth) {
+        DB::transaction(function () use ($data, $accountBankTransaction) {
             $sender    = AccountBank::findOrFail($data['sender_id']);
             $recipient = AccountBank::findOrFail($data['recipient_id']);
 
