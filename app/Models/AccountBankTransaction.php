@@ -9,11 +9,6 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 #[ObservedBy([GlobalUUIDObserver::class])]
 class AccountBankTransaction extends SuperModel
 {
-    /**
-     * @var string
-     */
-    protected $id;
-
     protected $fillable = [
         'sender_id',
         'recipient_id',
@@ -25,7 +20,6 @@ class AccountBankTransaction extends SuperModel
     ];
 
     protected $casts = [
-        'id'           => 'string',
         'status'       => TransactionStatusEnum::class,
         'authorized'   => 'boolean',
         'amount'       => 'decimal:2',
