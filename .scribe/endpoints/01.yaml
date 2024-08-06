@@ -30,7 +30,7 @@ endpoints:
         name: sender_id
         description: 'O ID da conta de origem. Exemplo: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6'
         required: true
-        example: nam
+        example: ducimus
         type: uuid
         enumValues: []
         exampleWasSpecified: false
@@ -39,7 +39,7 @@ endpoints:
         name: recipient_id
         description: 'O ID da conta de destino. Exemplo: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1'
         required: true
-        example: id
+        example: quod
         type: uuid
         enumValues: []
         exampleWasSpecified: false
@@ -48,7 +48,7 @@ endpoints:
         name: amount
         description: 'O valor a ser transferido. Exemplo: 1000.00'
         required: true
-        example: ratione
+        example: ea
         type: numeric
         enumValues: []
         exampleWasSpecified: false
@@ -57,16 +57,16 @@ endpoints:
         name: scheduled_at
         description: 'nullable A data e hora agendadas para a transação. Exemplo: 2024-08-07'
         required: false
-        example: amet
+        example: aut
         type: 'date_format:Y-m-d'
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      sender_id: nam
-      recipient_id: id
-      amount: ratione
-      scheduled_at: amet
+      sender_id: ducimus
+      recipient_id: quod
+      amount: ea
+      scheduled_at: aut
     fileParameters: []
     responses:
       -
