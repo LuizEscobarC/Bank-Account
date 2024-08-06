@@ -21,6 +21,16 @@ cd AccountBankManager
 
 composer install 
 
+# Copie o arquivo .env.example para criar um arquivo .env e configure as variáveis de ambiente:
+Bash
+
+cp .env.example .env
+
+# Certifique-se de definir a APP_KEY gerando uma nova chave:
+
+./vendor/bin/sail artisan key:generate
+
+
 
 ```
 ## SHORTCUTS DE TESTES
@@ -33,7 +43,8 @@ composer install
 ./vendor/bin/sail artisan seed
 
 # na raiz do projeto rode para trocar o agendamento da regra de negócio pra algo mais testavel...
-sed -i.bak "s/dailyAt('05:00')/everyMinute()/g" routes/console.php
+sed -i.bak "s/dailyAt('05:00')/everyMinute()/g" ./routes/console.php
+#ou altere no arquivo de rotas de console
 
 # após isso abra dois terminais, um será pra rodar a fila e outro pra testar o que quiser
 # antes de rodar a fila abra o banco e repare nos valores de balance, amount, de cada usuario
@@ -86,7 +97,7 @@ open http://localhost:80/docs
 - - - - caso o autorizador esteja fora do ar e retorne um 500, o padrão é não autorizar a transação, decidi isso pois se fosse real não faria sentido liberar o envio de dinheiro sem autorização.
 - - - - a autorização é aplicada no endpoint manual sem agendamento
 
-- COMMAND CLI
+# COMMAND CLI
 ```bash
 # esse comando só permite preencher o nome, o valor é zerado por padrão
 #input
