@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+"$(dirname "$0")/h"
 
 # Cores
 NC='\033[0m'
