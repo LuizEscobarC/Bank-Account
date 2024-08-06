@@ -5,7 +5,6 @@ use App\Services\Auth\AuthService;
 use App\Services\Auth\Clients\ExternalAuthClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
-use Mockery;
 
 /**
  * Mocks para os serviços de autenticação
