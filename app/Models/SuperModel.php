@@ -12,8 +12,11 @@ class SuperModel extends Model
 {
     use HasFactory;
 
-    /** Necessário para usar unique UUID */
-    public string $id = '';
+    /** Necessário para usar uuid */
+    public $incrementing = false;
 
-    public bool $incrementing = false;
+    /**
+     * @var string
+     */
+    protected $id;
 }
