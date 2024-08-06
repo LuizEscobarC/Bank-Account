@@ -13,6 +13,7 @@ class AccountBankController extends Controller
      *
      * @param CreateAccountBankRequest $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function store(
         CreateAccountBankRequest $request,
@@ -25,7 +26,7 @@ class AccountBankController extends Controller
 
             return response()->json($accountBank, 201);
         } catch (ValidationException $e) {
-            response()->json([
+            return response()->json([
                 'message' => $e->getMessage(),
             ], 403);
         } catch (\Exception $e) {
