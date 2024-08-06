@@ -28,25 +28,25 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'O nome do titular da conta.'
+        description: 'O nome do titular da conta. Exemplo: John Doe'
         required: true
-        example: 'John Doe'
+        example: sit
         type: string
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         custom: []
       balance:
         name: balance
-        description: 'nullable O saldo inicial da conta.'
+        description: 'nullable O saldo inicial da conta. Exemplo: 1000.00'
         required: false
-        example: '1000'
+        example: nemo
         type: numeric
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      name: 'John Doe'
-      balance: '1000'
+      name: sit
+      balance: nemo
     fileParameters: []
     responses:
       -
@@ -55,9 +55,9 @@ endpoints:
           {
               "id": "uuid",
               "name": "John Doe",
-              "balance": 1000,
-              "created_at": "2024-08-06T00:00:00.000000Z",
-              "updated_at": "2024-08-06T00:00:00.000000Z"
+              "balance": 1000.00,
+              "created_at": "2024-08-06 19:46:33",
+              "updated_at": "2024-08-06 19:46:33"
           }
         headers: []
         description: ''

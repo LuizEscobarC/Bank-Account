@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "de66bb68-a47a-4f6a-8b4f-bdf13eb55ad1",
+        "_postman_id": "6098350e-afc9-43bf-8d80-7207789c5943",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"balance\":\"1000\"}"
+                            "raw": "{\"name\":\"sit\",\"balance\":\"nemo\"}"
                         },
                         "description": "",
                         "auth": {
@@ -52,7 +52,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\n    \"id\": \"uuid\",\n    \"name\": \"John Doe\",\n    \"balance\": 1000,\n    \"created_at\": \"2024-08-06T00:00:00.000000Z\",\n    \"updated_at\": \"2024-08-06T00:00:00.000000Z\"\n}",
+                            "body": "{\n    \"id\": \"uuid\",\n    \"name\": \"John Doe\",\n    \"balance\": 1000.00,\n    \"created_at\": \"2024-08-06 19:46:33\",\n    \"updated_at\": \"2024-08-06 19:46:33\"\n}",
                             "name": ""
                         },
                         {
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"sender_id\":\"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",\"recipient_id\":\"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",\"amount\":\"1000.00\",\"scheduled_at\":\"2024-08-07\"}"
+                            "raw": "{\"sender_id\":\"nam\",\"recipient_id\":\"id\",\"amount\":\"ratione\",\"scheduled_at\":\"amet\"}"
                         },
                         "description": "",
                         "auth": {
@@ -102,7 +102,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\n    \"id\": \"uuid\",\n    \"amount\": 1000.00,\n    \"sender_id\": \"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",\n    \"recipient_id\": \"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",\n    \"status\": \"completed\",\n    \"scheduled_at\": \"2024-08-07T00:00:00.000000Z\",\n    \"created_at\": \"2024-08-06T00:00:00.000000Z\",\n    \"updated_at\": \"2024-08-06T00:00:00.000000Z\"\n}",
+                            "body": "{\n    \"id\": \"uuid\",\n    \"amount\": 1000.00,\n    \"sender_id\": \"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",\n    \"recipient_id\": \"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",\n    \"status\": \"completed\",\n    \"scheduled_at\": \"2024-08-07 00:00:00\",\n    \"created_at\": \"2024-08-06 00:00:00\",\n    \"updated_at\": \"2024-08-06 00:00:00\"\n}",
                             "name": ""
                         },
                         {

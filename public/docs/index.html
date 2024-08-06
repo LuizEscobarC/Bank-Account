@@ -134,8 +134,8 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"John Doe\",
-    \"balance\": \"1000\"
+    \"name\": \"sit\",
+    \"balance\": \"nemo\"
 }"
 </code></pre></div>
 
@@ -151,8 +151,8 @@ const headers = {
 };
 
 let body = {
-    "name": "John Doe",
-    "balance": "1000"
+    "name": "sit",
+    "balance": "nemo"
 };
 
 fetch(url, {
@@ -173,8 +173,8 @@ fetch(url, {
     &quot;id&quot;: &quot;uuid&quot;,
     &quot;name&quot;: &quot;John Doe&quot;,
     &quot;balance&quot;: 1000,
-    &quot;created_at&quot;: &quot;2024-08-06T00:00:00.000000Z&quot;,
-    &quot;updated_at&quot;: &quot;2024-08-06T00:00:00.000000Z&quot;
+    &quot;created_at&quot;: &quot;2024-08-06 19:46:33&quot;,
+    &quot;updated_at&quot;: &quot;2024-08-06 19:46:33&quot;
 }</code>
  </pre>
             <blockquote>
@@ -271,10 +271,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-account-banks-store"
-               value="John Doe"
+               value="sit"
                data-component="body">
     <br>
-<p>O nome do titular da conta. Example: <code>John Doe</code></p>
+<p>O nome do titular da conta. Exemplo: John Doe Example: <code>sit</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>balance</code></b>&nbsp;&nbsp;
@@ -282,10 +282,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="balance"                data-endpoint="POSTapi-account-banks-store"
-               value="1000"
+               value="nemo"
                data-component="body">
     <br>
-<p>nullable O saldo inicial da conta. Example: <code>1000</code></p>
+<p>nullable O saldo inicial da conta. Exemplo: 1000.00 Example: <code>nemo</code></p>
         </div>
         </form>
 
@@ -310,10 +310,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"sender_id\": \"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",
-    \"recipient_id\": \"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",
-    \"amount\": \"1000.00\",
-    \"scheduled_at\": \"2024-08-07\"
+    \"sender_id\": \"nam\",
+    \"recipient_id\": \"id\",
+    \"amount\": \"ratione\",
+    \"scheduled_at\": \"amet\"
 }"
 </code></pre></div>
 
@@ -329,10 +329,10 @@ const headers = {
 };
 
 let body = {
-    "sender_id": "1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6",
-    "recipient_id": "6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1",
-    "amount": "1000.00",
-    "scheduled_at": "2024-08-07"
+    "sender_id": "nam",
+    "recipient_id": "id",
+    "amount": "ratione",
+    "scheduled_at": "amet"
 };
 
 fetch(url, {
@@ -355,9 +355,9 @@ fetch(url, {
     &quot;sender_id&quot;: &quot;1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6&quot;,
     &quot;recipient_id&quot;: &quot;6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1&quot;,
     &quot;status&quot;: &quot;completed&quot;,
-    &quot;scheduled_at&quot;: &quot;2024-08-07T00:00:00.000000Z&quot;,
-    &quot;created_at&quot;: &quot;2024-08-06T00:00:00.000000Z&quot;,
-    &quot;updated_at&quot;: &quot;2024-08-06T00:00:00.000000Z&quot;
+    &quot;scheduled_at&quot;: &quot;2024-08-07 00:00:00&quot;,
+    &quot;created_at&quot;: &quot;2024-08-06 00:00:00&quot;,
+    &quot;updated_at&quot;: &quot;2024-08-06 00:00:00&quot;
 }</code>
  </pre>
             <blockquote>
@@ -466,10 +466,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="sender_id"                data-endpoint="POSTapi-account-banks-transfer"
-               value="1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6"
+               value="nam"
                data-component="body">
     <br>
-<p>O ID da conta de origem. Example: <code>1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6</code></p>
+<p>O ID da conta de origem. Exemplo: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6 Example: <code>nam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>recipient_id</code></b>&nbsp;&nbsp;
@@ -477,10 +477,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="recipient_id"                data-endpoint="POSTapi-account-banks-transfer"
-               value="6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1"
+               value="id"
                data-component="body">
     <br>
-<p>O ID da conta de destino. Example: <code>6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1</code></p>
+<p>O ID da conta de destino. Exemplo: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1 Example: <code>id</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
@@ -488,10 +488,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="amount"                data-endpoint="POSTapi-account-banks-transfer"
-               value="1000.00"
+               value="ratione"
                data-component="body">
     <br>
-<p>O valor a ser transferido. Example: <code>1000.00</code></p>
+<p>O valor a ser transferido. Exemplo: 1000.00 Example: <code>ratione</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>scheduled_at</code></b>&nbsp;&nbsp;
@@ -499,10 +499,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="scheduled_at"                data-endpoint="POSTapi-account-banks-transfer"
-               value="2024-08-07"
+               value="amet"
                data-component="body">
     <br>
-<p>nullable A data e hora agendadas para a transação. Example: <code>2024-08-07</code></p>
+<p>nullable A data e hora agendadas para a transação. Exemplo: 2024-08-07 Example: <code>amet</code></p>
         </div>
         </form>
 

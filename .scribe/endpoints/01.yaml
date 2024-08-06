@@ -28,45 +28,45 @@ endpoints:
     bodyParameters:
       sender_id:
         name: sender_id
-        description: 'O ID da conta de origem.'
+        description: 'O ID da conta de origem. Exemplo: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6'
         required: true
-        example: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6
+        example: nam
         type: uuid
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         custom: []
       recipient_id:
         name: recipient_id
-        description: 'O ID da conta de destino.'
+        description: 'O ID da conta de destino. Exemplo: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1'
         required: true
-        example: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1
+        example: id
         type: uuid
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         custom: []
       amount:
         name: amount
-        description: 'O valor a ser transferido.'
+        description: 'O valor a ser transferido. Exemplo: 1000.00'
         required: true
-        example: '1000.00'
+        example: ratione
         type: numeric
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         custom: []
       scheduled_at:
         name: scheduled_at
-        description: 'nullable A data e hora agendadas para a transação.'
+        description: 'nullable A data e hora agendadas para a transação. Exemplo: 2024-08-07'
         required: false
-        example: '2024-08-07'
+        example: amet
         type: 'date_format:Y-m-d'
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      sender_id: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6
-      recipient_id: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1
-      amount: '1000.00'
-      scheduled_at: '2024-08-07'
+      sender_id: nam
+      recipient_id: id
+      amount: ratione
+      scheduled_at: amet
     fileParameters: []
     responses:
       -
@@ -78,9 +78,9 @@ endpoints:
               "sender_id": "1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6",
               "recipient_id": "6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1",
               "status": "completed",
-              "scheduled_at": "2024-08-07T00:00:00.000000Z",
-              "created_at": "2024-08-06T00:00:00.000000Z",
-              "updated_at": "2024-08-06T00:00:00.000000Z"
+              "scheduled_at": "2024-08-07 00:00:00",
+              "created_at": "2024-08-06 00:00:00",
+              "updated_at": "2024-08-06 00:00:00"
           }
         headers: []
         description: ''

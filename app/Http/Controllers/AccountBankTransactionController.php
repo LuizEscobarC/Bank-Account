@@ -16,10 +16,10 @@ class AccountBankTransactionController extends Controller
     /**
      * Realiza uma transferência de valores entre contas.
      *
-     * @bodyParam amount numeric required O valor a ser transferido. Example: 1000.00
-     * @bodyParam sender_id uuid required O ID da conta de origem. Example: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6
-     * @bodyParam recipient_id uuid required O ID da conta de destino. Example: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1
-     * @bodyParam scheduled_at date_format:Y-m-d nullable A data e hora agendadas para a transação. Example: 2024-08-07
+     * @bodyParam amount numeric required O valor a ser transferido. Exemplo: 1000.00
+     * @bodyParam sender_id uuid required O ID da conta de origem. Exemplo: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6
+     * @bodyParam recipient_id uuid required O ID da conta de destino. Exemplo: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1
+     * @bodyParam scheduled_at date_format:Y-m-d nullable A data e hora agendadas para a transação. Exemplo: 2024-08-07
      *
      * @response 201 {
      *     "id": "uuid",
@@ -27,9 +27,9 @@ class AccountBankTransactionController extends Controller
      *     "sender_id": "1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6",
      *     "recipient_id": "6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1",
      *     "status": "completed",
-     *     "scheduled_at": "2024-08-07T00:00:00.000000Z",
-     *     "created_at": "2024-08-06T00:00:00.000000Z",
-     *     "updated_at": "2024-08-06T00:00:00.000000Z"
+     *     "scheduled_at": "2024-08-07 00:00:00",
+     *     "created_at": "2024-08-06 00:00:00",
+     *     "updated_at": "2024-08-06 00:00:00"
      * }
      * @response 422 {
      *     "errors": {
@@ -63,11 +63,10 @@ class AccountBankTransactionController extends Controller
         CreateAccountBankTransactionRequest $request,
         AccountBankTransactionService $accountBankTransactionService
     ): AccountBankTransactionResource {
-        // Valida e processa a transação
-        $accountBank = $accountBankTransactionService->create(
+        $accountBankTransaction = $accountBankTransactionService->create(
             $request->validated()
         );
 
-        return AccountBankTransactionResource::make($accountBank);
+        return AccountBankTransactionResource::make($accountBankTransaction);
     }
 }
