@@ -103,14 +103,19 @@ class AccountBankTransactionService
      */
     private function processExternalAuth(array $data): bool
     {
+        // Cria um objeto ExternalAuthRequestData com os dados fornecidos
         $dtoExternalRequestData = new ExternalAuthRequestData(
             sender: $data['sender_id'],
             receiver: $data['recipient_id'],
             amount: $data['amount']
         );
 
-        return $this->authService->processAccount($dtoExternalRequestData)
-        ->authorized;
+        // Processa a autenticação e verifica se foi autorizada
+        $response = $this->authService->processAccount($dtoExternalRequestData);
+
+        // Verifica se a resposta possui a propriedade 'authorized'
+        // Certifique-se de que o método processAccount retorna um objeto adequado
+        return $response->authorized ?? false;
     }
 
     /**
