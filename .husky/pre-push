@@ -9,7 +9,7 @@ if [ $? -ne 0 ]; then
 fi;
 
 # rodar os testes
-php artisan test --parallel | php
+./vendor/bin/sail artisan test --parallel | php
 if [ $? -ne 0 ]; then
     echo "Não é que eu seja ruiom mas deu ruim aqui com algum teste... :^)";
     exit 1;
