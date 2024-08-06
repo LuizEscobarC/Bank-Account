@@ -14,9 +14,4 @@ class SuperModel extends Model
 
     /** Necessário para usar uuid */
     public $incrementing = false;
-
-    /**
-     * @var string
-     */
-    protected $id;
 }
