@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use App\Jobs\ProcessScheduledTransactionsJob;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+// CRON que processa transferências do dia anterior as 5am
+Schedule::job(resolve(ProcessScheduledTransactionsJob::class))->dailyAt('05:00');
