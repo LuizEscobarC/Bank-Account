@@ -34,7 +34,7 @@ echo "\033[1mSerá que vai dar erro?\033[0m";
 sleep 5
 clear
 
-./vendor/bin/sail artisan test --parallel
+./vendor/bin/sail artisan test
 if [ $? -ne 0 ]; then
     echo "\033[1mAlguns testes falharam. Corrija os erros antes de fazer o commit. 😞\033[0m"
     exit 1
