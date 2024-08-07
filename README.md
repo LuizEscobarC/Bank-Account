@@ -17,9 +17,8 @@ git clone https://github.com/LuizEscobarC/Bank-Account.git
 
 cd AccountBankManager
 composer install
-./vendor/bin/sail up -d
 
-composer install 
+./vendor/bin/sail up -d
 
 # Copie o arquivo .env.example para criar um arquivo .env e configure as variáveis de ambiente:
 Bash
