@@ -17,10 +17,8 @@ it('has the correct fillable attributes', function () {
     $fillable = [
         'sender_id',
         'recipient_id',
-        'status',
         'amount',
         'scheduled_at',
-        'processed_at',
     ];
 
     expect($transaction->getFillable())->toEqual($fillable);
