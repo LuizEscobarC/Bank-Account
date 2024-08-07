@@ -28,6 +28,7 @@ class AccountBankTransactionController extends Controller
      *     "recipient_id": "6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1",
      *     "status": "completed",
      *     "scheduled_at": "2024-08-07 00:00:00",
+     *     "processed_at": "2024-08-07 00:00:00",
      *     "created_at": "2024-08-06 00:00:00",
      *     "updated_at": "2024-08-06 00:00:00"
      * }
