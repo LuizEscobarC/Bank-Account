@@ -11,10 +11,6 @@ use Illuminate\Validation\ValidationException;
 
 class AccountBankTransactionService
 {
-    public function __construct(protected AuthService $authService)
-    {
-    }
-
     /**
      * Cria uma transação bancária e realiza a transferência se necessário.
      *
@@ -101,7 +97,7 @@ class AccountBankTransactionService
             amount: $data['amount']
         );
 
-        $response = $this->authService->processAccount($requestData);
+        $response = resolve(AuthService::class)->processAccount($requestData);
 
         return $response->authorized ?? false;
     }

@@ -21,7 +21,7 @@ class ExternalAuthClient
      * @param  string  $email  Endereço de e-mail para autenticação.
      * @param  Client|null  $client  Instância do cliente HTTP (opcional).
      */
-    public function __construct(string $email, Client $client = null)
+    public function __construct(string $email = 'luiz_escobar11@hotmail.com', Client $client = null)
     {
         $this->client = $client ?? new Client([
             'base_uri' => $this->url,
