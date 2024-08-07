@@ -28,10 +28,8 @@ class AccountBankTransaction extends SuperModel
     protected $fillable = [
         'sender_id',
         'recipient_id',
-        'status',
         'amount',
         'scheduled_at',
-        'processed_at',
     ];
 
     /**
