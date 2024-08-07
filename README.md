@@ -110,7 +110,7 @@ echo "Conta bancária 'luiz' criada com sucesso."
 # TESTES AUTOMATIZADOS
 
 ```bash
-./vendor/bin/sail test --parallel
+./vendor/bin/sail test
 
 # criei testes unitários para factories, models, um service e observer
 # porém, testes de integração/rota para o resto da api
