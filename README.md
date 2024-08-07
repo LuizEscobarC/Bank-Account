@@ -16,7 +16,7 @@ Este guia fornece as instruções necessárias para instalar e configurar o proj
 git clone https://github.com/LuizEscobarC/Bank-Account.git
 
 cd AccountBankManager
-
+composer install
 ./vendor/bin/sail up -d
 
 composer install 
