@@ -29,7 +29,7 @@ class ProcessScheduledTransactionsJob implements ShouldQueue
 
         // Adiciona na fila cada transação agendada
         foreach ($transactions as $transaction) {
-            ProcessIndividualTransactionsJob::dispatch($transaction, new AccountBankTransactionService());
+            ProcessIndividualTransactionsJob::dispatch($transaction, app(AccountBankTransactionService::class));
         }
     }
 }
