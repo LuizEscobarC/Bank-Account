@@ -51,7 +51,7 @@ sed -i.bak "s/dailyAt('05:00')/everyMinute()/g" ./routes/console.php
 # _ e suas transferências agendadas
 
 # inicie a fila e espera 1 minuto, se quiser pode abrir multiplor workers
-./vendor/bin/sail artisan queue:work
+./vendor/bin/sail artisan db:seed && ./vendor/bin/sail artisan queue:work
 
 # após rodar o jobs de agendamento e o de processamento de transações agendadas de uma_
 # olhada no banco novamente e verá que todas as regras de negócio estão corretas.
