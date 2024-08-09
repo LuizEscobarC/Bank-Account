@@ -39,7 +39,7 @@ cp .env.example .env
 ```bash
 ./vendor/bin/sail artisan migrate
 
-./vendor/bin/sail artisan seed
+./vendor/bin/sail artisan db:seed
 
 # na raiz do projeto rode para trocar o agendamento da regra de negócio pra algo mais testavel...
 sed -i.bak "s/dailyAt('05:00')/everyMinute()/g" ./routes/console.php
