@@ -18,6 +18,10 @@ git clone https://github.com/LuizEscobarC/Bank-Account.git
 cd BankManager
 composer install
 
+# caso esteja usando MACOS adicionar essa linha a cada serviço no docker-compose:
+awk '/image:/ { print; print "        platform: linux/amd64"; next }1' docker-compose.yml > temp.yml && mv temp.yml docker-compose.yml
+
+# suba os containers
 ./vendor/bin/sail up -d
 
 # Copie o arquivo .env.example para criar um arquivo .env e configure as variáveis de ambiente:
