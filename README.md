@@ -15,11 +15,14 @@ Este guia fornece as instruções necessárias para instalar e configurar o proj
 ```bash
 git clone https://github.com/LuizEscobarC/Bank-Account.git
 
-cd AccountBankManager
+cd BankManager
+composer install
 
+# caso esteja usando MACOS adicionar essa linha a cada serviço no docker-compose:
+awk '/image:/ { print; print "        platform: linux/amd64"; next }1' docker-compose.yml > temp.yml && mv temp.yml docker-compose.yml
+
+# suba os containers
 ./vendor/bin/sail up -d
-
-composer install 
 
 # Copie o arquivo .env.example para criar um arquivo .env e configure as variáveis de ambiente:
 Bash
@@ -40,7 +43,7 @@ cp .env.example .env
 ```bash
 ./vendor/bin/sail artisan migrate
 
-./vendor/bin/sail artisan seed
+./vendor/bin/sail artisan db:seed
 
 # na raiz do projeto rode para trocar o agendamento da regra de negócio pra algo mais testavel...
 sed -i.bak "s/dailyAt('05:00')/everyMinute()/g" ./routes/console.php

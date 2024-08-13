@@ -66,6 +66,8 @@ class AccountBankTransactionService
 
         if (!$externalAuthAuthorized) {
             $transaction->markNotAuthorized();
+
+            return false;
         }
 
         DB::transaction(function () use ($data, $transaction) {
