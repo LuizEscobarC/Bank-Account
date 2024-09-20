@@ -80,7 +80,8 @@ jobs:
 
     - name: Build and Push Docker image to Heroku
       run: |
-        heroku container:push web --app account-bank
+        docker build -t registry.heroku.com/account-bank/web -f docker/8.2/Dockerfile .
+        docker push registry.heroku.com/account-bank/web
 
     - name: Release Docker image on Heroku
       run: |
