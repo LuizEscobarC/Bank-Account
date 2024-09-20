@@ -44,7 +44,7 @@ jobs:
       run: ./vendor/bin/sail artisan test
 
     - name: Execute Larastan
-      run: ./vendor/bin/sail phpstan analyse
+      run: ./vendor/bin/sail exec laravel.test ./vendor/bin/phpstan analyse
 
     - name: Execute Laravel Pint
-      run: ./vendor/bin/sail pint --test
+      run: ./vendor/bin/sail exec laravel.test ./vendor/bin/pint --test
