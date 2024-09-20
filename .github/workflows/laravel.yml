@@ -28,11 +28,11 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-    - name: Generate key
-      run: ./vendor/bin/sail artisan key:generate
-
     - name: Run Sail
       run: ./vendor/bin/sail up -d
+    
+    - name: Generate key
+      run: ./vendor/bin/sail artisan key:generate
 
     - name: Wait for MySQL to be ready
       run: ./vendor/bin/sail exec mysql bash -c 'while ! mysqladmin ping -h"mysql" --silent; do sleep 1; done'
