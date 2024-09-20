@@ -25,23 +25,26 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 755 storage bootstrap/cache
 
-    - name: Run Sail
-      run: ./vendor/bin/sail up -d
-
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
     - name: Generate key
       run: ./vendor/bin/sail artisan key:generate
 
+    - name: Run Sail
+      run: ./vendor/bin/sail up -d
+
+    - name: Wait for MySQL to be ready
+      run: ./vendor/bin/sail exec mysql bash -c 'while ! mysqladmin ping -h"mysql" --silent; do sleep 1; done'
+
     - name: Run database migrations
       run: ./vendor/bin/sail artisan migrate --force
 
     - name: Run tests
       run: ./vendor/bin/sail artisan test
-      
+
     - name: Execute Larastan
-      run: ./vendor/bin/phpstan analyse
-      
+      run: ./vendor/bin/sail phpstan analyse
+
     - name: Execute Laravel Pint
-      run: ./vendor/bin/pint --test
+      run: ./vendor/bin/sail pint --test
