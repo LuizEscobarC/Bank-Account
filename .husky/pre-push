@@ -3,7 +3,7 @@
 # Rodar o PHPStan e verificar erros
 echo "\033[1mRodando PHPStan...
      (　-_･) ︻デ═一 ▸ Estou verificando suas tipagens\033[0m\n\n"
-sleep 1;
+sleep 1
 
 ./vendor/bin/phpstan
 if [ $? -ne 0 ]; then
@@ -31,7 +31,7 @@ echo "\033[1mRodando testes com Sail...
 
 echo "\033[1mSerá que vai dar erro?\033[0m";
 
-sleep 5
+sleep 1
 clear
 
 ./vendor/bin/sail artisan test
