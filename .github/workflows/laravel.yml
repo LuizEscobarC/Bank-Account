@@ -1,4 +1,4 @@
-name: Laravel CI
+name: Laravel CI/CD
 
 on:
   push:
@@ -34,9 +34,9 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-    - name: Run Sail
+    - name: Set up Sail
       run: ./vendor/bin/sail up -d
-    
+
     - name: Generate key
       run: ./vendor/bin/sail artisan key:generate
 
@@ -54,3 +54,12 @@ jobs:
 
     - name: Execute Laravel Pint
       run: ./vendor/bin/sail exec laravel.test ./vendor/bin/pint --test
+
+    - name: Notify Slack on Failure
+      if: failure()
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
