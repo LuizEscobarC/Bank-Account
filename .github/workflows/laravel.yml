@@ -36,15 +36,15 @@ jobs:
     - name: Set up Sail
       run: ./vendor/bin/sail up -d
 
-    - name: Generate key
-      run: ./vendor/bin/sail artisan key:generate
-
     - name: Wait for MySQL to be ready
       run: |
         until ./vendor/bin/sail exec mysql mysqladmin ping -h"mysql" --silent; do
           echo "Waiting for MySQL to be ready..."
           sleep 1
         done
+
+    - name: Generate key
+      run: ./vendor/bin/sail artisan key:generate
 
     - name: Run database migrations
       run: ./vendor/bin/sail artisan migrate --force
