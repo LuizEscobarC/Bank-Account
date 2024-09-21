@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => ['Welcome to my api.']);
+Route::get('/', fn () => ['Welcome to -. api.']);
