@@ -3,8 +3,8 @@ name: Laravel CI/CD
 on:
   pull_request:
     branches:
-      - main
       - develop
+      - main
 
 jobs:
   build-and-test:
@@ -29,6 +29,14 @@ jobs:
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: Add swap memory
+      run: |
+        sudo fallocate -l 4G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+        sudo swapon --show
 
     - name: Set up Sail
       run: ./vendor/bin/sail up -d
