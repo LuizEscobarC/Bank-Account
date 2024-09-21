@@ -95,7 +95,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: August 6, 2024</li>
+        <li>Last updated: September 20, 2024</li>
     </ul>
 </div>
 
@@ -134,8 +134,8 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"eum\",
-    \"balance\": \"labore\"
+    \"name\": \"voluptas\",
+    \"balance\": \"dolores\"
 }"
 </code></pre></div>
 
@@ -151,8 +151,8 @@ const headers = {
 };
 
 let body = {
-    "name": "eum",
-    "balance": "labore"
+    "name": "voluptas",
+    "balance": "dolores"
 };
 
 fetch(url, {
@@ -271,10 +271,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-account-banks-store"
-               value="eum"
+               value="voluptas"
                data-component="body">
     <br>
-<p>O nome do titular da conta. Exemplo: John Doe Example: <code>eum</code></p>
+<p>O nome do titular da conta. Exemplo: John Doe Example: <code>voluptas</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>balance</code></b>&nbsp;&nbsp;
@@ -282,10 +282,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="balance"                data-endpoint="POSTapi-account-banks-store"
-               value="labore"
+               value="dolores"
                data-component="body">
     <br>
-<p>nullable O saldo inicial da conta. Exemplo: 1000.00 Example: <code>labore</code></p>
+<p>nullable O saldo inicial da conta. Exemplo: 1000.00 Example: <code>dolores</code></p>
         </div>
         </form>
 
@@ -310,10 +310,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"sender_id\": \"ducimus\",
-    \"recipient_id\": \"quod\",
-    \"amount\": \"ea\",
-    \"scheduled_at\": \"aut\"
+    \"sender_id\": \"provident\",
+    \"recipient_id\": \"aperiam\",
+    \"amount\": \"placeat\",
+    \"scheduled_at\": \"omnis\"
 }"
 </code></pre></div>
 
@@ -329,10 +329,10 @@ const headers = {
 };
 
 let body = {
-    "sender_id": "ducimus",
-    "recipient_id": "quod",
-    "amount": "ea",
-    "scheduled_at": "aut"
+    "sender_id": "provident",
+    "recipient_id": "aperiam",
+    "amount": "placeat",
+    "scheduled_at": "omnis"
 };
 
 fetch(url, {
@@ -356,6 +356,7 @@ fetch(url, {
     &quot;recipient_id&quot;: &quot;6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1&quot;,
     &quot;status&quot;: &quot;completed&quot;,
     &quot;scheduled_at&quot;: &quot;2024-08-07 00:00:00&quot;,
+    &quot;processed_at&quot;: &quot;2024-08-07 00:00:00&quot;,
     &quot;created_at&quot;: &quot;2024-08-06 00:00:00&quot;,
     &quot;updated_at&quot;: &quot;2024-08-06 00:00:00&quot;
 }</code>
@@ -466,10 +467,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="sender_id"                data-endpoint="POSTapi-account-banks-transfer"
-               value="ducimus"
+               value="provident"
                data-component="body">
     <br>
-<p>O ID da conta de origem. Exemplo: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6 Example: <code>ducimus</code></p>
+<p>O ID da conta de origem. Exemplo: 1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6 Example: <code>provident</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>recipient_id</code></b>&nbsp;&nbsp;
@@ -477,10 +478,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="recipient_id"                data-endpoint="POSTapi-account-banks-transfer"
-               value="quod"
+               value="aperiam"
                data-component="body">
     <br>
-<p>O ID da conta de destino. Exemplo: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1 Example: <code>quod</code></p>
+<p>O ID da conta de destino. Exemplo: 6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1 Example: <code>aperiam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
@@ -488,10 +489,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="amount"                data-endpoint="POSTapi-account-banks-transfer"
-               value="ea"
+               value="placeat"
                data-component="body">
     <br>
-<p>O valor a ser transferido. Exemplo: 1000.00 Example: <code>ea</code></p>
+<p>O valor a ser transferido. Exemplo: 1000.00 Example: <code>placeat</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>scheduled_at</code></b>&nbsp;&nbsp;
@@ -499,10 +500,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="scheduled_at"                data-endpoint="POSTapi-account-banks-transfer"
-               value="aut"
+               value="omnis"
                data-component="body">
     <br>
-<p>nullable A data e hora agendadas para a transação. Exemplo: 2024-08-07 Example: <code>aut</code></p>
+<p>nullable A data e hora agendadas para a transação. Exemplo: 2024-08-07 Example: <code>omnis</code></p>
         </div>
         </form>
 
