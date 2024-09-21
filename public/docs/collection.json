@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "4963f93d-6fb4-4a90-a068-3e580881812c",
+        "_postman_id": "01840ec0-c7f3-4e38-834d-c05395b7b731",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"eum\",\"balance\":\"labore\"}"
+                            "raw": "{\"name\":\"voluptas\",\"balance\":\"dolores\"}"
                         },
                         "description": "",
                         "auth": {
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"sender_id\":\"ducimus\",\"recipient_id\":\"quod\",\"amount\":\"ea\",\"scheduled_at\":\"aut\"}"
+                            "raw": "{\"sender_id\":\"provident\",\"recipient_id\":\"aperiam\",\"amount\":\"placeat\",\"scheduled_at\":\"omnis\"}"
                         },
                         "description": "",
                         "auth": {
@@ -102,7 +102,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\n    \"id\": \"uuid\",\n    \"amount\": 1000.00,\n    \"sender_id\": \"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",\n    \"recipient_id\": \"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",\n    \"status\": \"completed\",\n    \"scheduled_at\": \"2024-08-07 00:00:00\",\n    \"created_at\": \"2024-08-06 00:00:00\",\n    \"updated_at\": \"2024-08-06 00:00:00\"\n}",
+                            "body": "{\n    \"id\": \"uuid\",\n    \"amount\": 1000.00,\n    \"sender_id\": \"1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6\",\n    \"recipient_id\": \"6p5o4n3m-2l1k-j0i9-h8g7-f6e5d4c3b2a1\",\n    \"status\": \"completed\",\n    \"scheduled_at\": \"2024-08-07 00:00:00\",\n    \"processed_at\": \"2024-08-07 00:00:00\",\n    \"created_at\": \"2024-08-06 00:00:00\",\n    \"updated_at\": \"2024-08-06 00:00:00\"\n}",
                             "name": ""
                         },
                         {
