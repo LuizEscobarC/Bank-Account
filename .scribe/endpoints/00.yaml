@@ -30,7 +30,7 @@ endpoints:
         name: name
         description: 'O nome do titular da conta. Exemplo: John Doe'
         required: true
-        example: eum
+        example: voluptas
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -39,14 +39,14 @@ endpoints:
         name: balance
         description: 'nullable O saldo inicial da conta. Exemplo: 1000.00'
         required: false
-        example: labore
+        example: dolores
         type: numeric
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      name: eum
-      balance: labore
+      name: voluptas
+      balance: dolores
     fileParameters: []
     responses:
       -
