@@ -18,12 +18,6 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Disable Husky hooks
-      run: npx husky disable
-
     - name: Install Heroku CLI
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
