@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAccountBankRequest;
 use App\Http\Resources\AccountBankResource;
 use App\Services\AccountBankService;
+use App\Models\AccountBank;
+use Illuminate\Http\JsonResponse;
+
 
 /**
  * @group Account Bank
@@ -51,4 +54,25 @@ class AccountBankController extends Controller
 
         return AccountBankResource::make($accountBank);
     }
+
+    public function show($id): JsonResponse
+    {
+        // Tenta encontrar a conta bancária pelo ID
+        $accountBank = AccountBank::find($id);
+
+        // Verifica se a conta foi encontrada
+        if (!$accountBank) {
+            return response()->json([
+                'error' => 'Account not found'
+            ], 404); // Retorna um erro 404 se não encontrar
+        }
+
+        // Retorna os dados da conta em formato JSON
+        return response()->json([
+            'id' => $accountBank->id,
+            'name' => $accountBank->name,
+            'balance' => $accountBank->balance
+        ]);
+    }
+
 }
