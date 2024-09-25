@@ -6,7 +6,6 @@ use App\Http\Requests\CreateAccountBankRequest;
 use App\Http\Resources\AccountBankResource;
 use App\Models\AccountBank;
 use App\Services\AccountBankService;
-use Illuminate\Http\JsonResponse;
 
 /**
  * @group Account Bank
@@ -54,7 +53,7 @@ class AccountBankController extends Controller
         return AccountBankResource::make($accountBank);
     }
 
-    public function show($id): JsonResponse
+    public function show($id)
     {
         $accountBank = AccountBank::findOrFail($id);
         return new AccountBankResource($accountBank);
