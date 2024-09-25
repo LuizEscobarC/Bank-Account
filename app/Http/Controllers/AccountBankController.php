@@ -56,22 +56,8 @@ class AccountBankController extends Controller
 
     public function show($id): JsonResponse
     {
-        // Tenta encontrar a conta bancária pelo ID
-        $accountBank = AccountBank::find($id);
-
-        // Verifica se a conta foi encontrada
-        if (!$accountBank) {
-            return response()->json([
-                'error' => 'Account not found',
-            ], 404); // Retorna um erro 404 se não encontrar
-        }
-
-        // Retorna os dados da conta em formato JSON
-        return response()->json([
-            'id'      => $accountBank->id,
-            'name'    => $accountBank->name,
-            'balance' => $accountBank->balance,
-        ]);
+        $accountBank = AccountBank::findOrFail($id);
+        return new AccountBankResource($accountBank);
+        
     }
-
 }
