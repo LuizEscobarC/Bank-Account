@@ -12,7 +12,7 @@ Route::group(['as' => 'account-banks.', 'prefix' => 'account-banks'], function (
     Route::post('/transfer', [AccountBankTransactionController::class, 'transferAmount'])->name("transaction");
 
     Route::get('/', fn () => response()->json([
-        'success' => true
+        'success' => true,
     ]));
 
     Route::get('/{id}', [AccountBankController::class, 'show'])->name('account.show');
