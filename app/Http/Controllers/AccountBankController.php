@@ -56,7 +56,8 @@ class AccountBankController extends Controller
     public function show($id)
     {
         $accountBank = AccountBank::findOrFail($id);
+
         return new AccountBankResource($accountBank);
-        
+
     }
 }
