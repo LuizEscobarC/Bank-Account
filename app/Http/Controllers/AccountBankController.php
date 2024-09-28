@@ -9,7 +9,6 @@ use App\Services\AccountBankService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 /**
  * @group Account Bank
  *
@@ -64,34 +63,35 @@ class AccountBankController extends Controller
 
     }
 
-    public function update(Request $request, string $id){
-        
+    public function update(Request $request, string $id)
+    {
+
         $accountBank = AccountBank::findOrFail($id);
-        
-        $validator = Validator::make($request->all(),
-        [
-            'name'=> 'required|string|max:255',
-            'balance'=> 'required|integer',
-        ]);
-        if($validator->fails())
-        {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name'    => 'required|string|max:255',
+                'balance' => 'required|integer',
+            ]
+        );
+
+        if($validator->fails()) {
             return response()->json([
                 'message' => 'all fields are required',
-                'error' => $validator->messages(),
+                'error'   => $validator->messages(),
             ], 422);
         }
 
         $accountBank->update([
 
-            'name' => $request->name,
+            'name'    => $request->name,
             'balance' => $request->balance,
 
         ]);
-        
-        
-         return new AccountBankResource($accountBank);
+
+        return new AccountBankResource($accountBank);
 
     }
-     
-    
+
 }
