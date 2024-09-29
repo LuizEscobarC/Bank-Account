@@ -93,4 +93,13 @@ class AccountBankController extends Controller
         return new AccountBankResource($accountBank);
 
     }
+
+    public function destroy(string $id)
+    {
+
+        $accountBank = AccountBank::findOrFail($id);
+        $accountBank->delete();
+
+        return response()->json(['message' => 'Account deleted successfully.'], 200);
+    }
 }
