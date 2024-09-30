@@ -91,12 +91,17 @@ class AccountBankController extends Controller
         ]);
 
         return new AccountBankResource($accountBank);
+    }
 
+    public function listAccounts()
+    {
+        $accountBank = AccountBank::all();
+
+        return AccountBankResource::collection($accountBank);
     }
 
     public function destroy(string $id)
     {
-
         $accountBank = AccountBank::findOrFail($id);
         $accountBank->delete();
 
